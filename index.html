@@ -13,934 +13,859 @@
   --text:#8ace8a;--text2:#c8f0c8;--text3:#4a7a4a;
   --blue:#79b8ff;--amber:#f4a261;--amber2:#ffd166;
   --red:#f09090;--red2:#cc4444;--purple:#c9a0ff;
-  --font-mono:'Courier New',monospace;
+  --mono:'Courier New',monospace;
 }
 html,body{height:100%;font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
-#app{display:flex;flex-direction:column;height:100vh;}
-
-/* NAV */
-#nav{display:flex;align-items:center;background:#060e06;border-bottom:1px solid var(--border);flex-shrink:0;}
-.nav-btn{padding:9px 14px;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;white-space:nowrap;}
-.nav-btn:hover{color:var(--text);}
-.nav-btn.active{color:var(--green3);border-bottom-color:var(--green);}
-.nav-sp{flex:1;}
+#app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+ 
+/* ── NAV ── */
+#nav{display:flex;align-items:center;background:#060e06;border-bottom:1px solid var(--border);flex-shrink:0;height:38px;}
+.nb{padding:0 13px;height:100%;font-size:12px;font-weight:500;color:var(--text3);cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;white-space:nowrap;}
+.nb:hover{color:var(--text);}
+.nb.on{color:var(--green3);border-bottom-color:var(--green);}
+.nsp{flex:1;}
 .hud{display:flex;align-items:center;gap:6px;padding:0 10px;font-size:12px;}
-.hud-sep{width:1px;height:12px;background:var(--border);}
-.hud-lv{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:2px 9px;font-size:11px;font-weight:600;color:var(--green3);}
-
-/* SCREENS */
-.screen{display:none;flex:1;overflow-y:auto;}
-.screen.active{display:block;}
+.hsep{width:1px;height:12px;background:var(--border);}
+.hlv{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;padding:2px 8px;font-size:11px;font-weight:600;color:var(--green3);}
+ 
+/* ── SCREENS ── */
+.scr{display:none;flex:1;overflow-y:auto;overflow-x:hidden;}
+.scr.on{display:block;}
 .si{padding:12px;}
-.sec{font-size:13px;font-weight:600;color:var(--green);margin-bottom:10px;}
-
-/* GARAGE */
-.car-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
-.car-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:10px;cursor:pointer;text-align:center;transition:border-color .15s;}
-.car-card:hover:not(.locked){border-color:var(--border2);}
-.car-card.sel{border-color:var(--green);background:var(--bg3);}
-.car-card.locked{opacity:.4;cursor:default;}
-.car-nm{font-size:11px;font-weight:600;color:var(--text2);margin:4px 0 2px;}
-.car-sub{font-size:9px;color:var(--text3);}
-.mbar{height:3px;background:var(--bg);border-radius:2px;margin:2px 0;overflow:hidden;}
-.mfill{height:100%;border-radius:2px;}
-.lock-t{font-size:9px;color:var(--text3);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1px 6px;margin-top:3px;display:inline-block;}
-.circ-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-bottom:12px;}
-.circ-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:9px 11px;cursor:pointer;transition:border-color .15s;}
-.circ-card:hover{border-color:var(--border2);}
-.circ-card.done{border-color:var(--green);}
-.circ-num{font-size:9px;color:var(--text3);margin-bottom:2px;}
-.circ-nm{font-size:12px;font-weight:600;margin-bottom:1px;}
-.circ-co{font-size:10px;color:var(--text3);}
-.cbadge{display:inline-block;font-size:9px;border-radius:8px;padding:1px 7px;margin-top:3px;}
-.cb-done{background:#1a4a1a;color:var(--green2);border:1px solid var(--green);}
-.cb-todo{background:var(--bg);color:var(--text3);border:1px solid var(--border);}
-.btn-go{display:block;width:100%;padding:11px;background:var(--bg3);border:1.5px solid var(--green);border-radius:10px;color:var(--green3);font-size:14px;font-weight:600;cursor:pointer;}
-.btn-go:hover{background:var(--bg4);}
-
-/* RACE SCREEN */
-#screen-race{display:none;flex-direction:column;flex:1;overflow:hidden;}
-#screen-race.active{display:flex;}
-#track-wrap{position:relative;background:#1a3a1a;flex-shrink:0;}
-#rc{display:block;width:100%;}
-#race-hud{display:flex;align-items:center;gap:7px;padding:5px 10px;background:#060e06;border-top:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;}
-.rhi{display:flex;align-items:center;gap:3px;font-size:11px;}
-.rhl{color:var(--text3);}.rhv{font-weight:600;color:var(--text2);}
-#pg-row{display:flex;align-items:center;gap:7px;padding:4px 10px;background:var(--bg);flex-shrink:0;}
-.pg-out{flex:1;height:6px;background:var(--bg2);border-radius:3px;overflow:hidden;border:1px solid var(--border);}
-.pg-in{height:100%;background:var(--green);border-radius:3px;transition:width .3s;}
-#overlays{flex-shrink:0;overflow-y:auto;max-height:42vh;}
-
-/* BILLBOARD */
+.sec{font-size:13px;font-weight:600;color:var(--green);margin-bottom:8px;}
+ 
+/* ── GARAGE ── */
+.cgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:12px;}
+.cc{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:8px;cursor:pointer;text-align:center;transition:border-color .15s;}
+.cc:hover:not(.lk){border-color:var(--border2);}
+.cc.sel{border-color:var(--green);background:var(--bg3);}
+.cc.lk{opacity:.4;cursor:default;}
+.cnm{font-size:11px;font-weight:600;color:var(--text2);margin:3px 0 1px;}
+.cs{font-size:9px;color:var(--text3);}
+.mb{height:3px;background:var(--bg);border-radius:2px;margin:2px 0;overflow:hidden;}
+.mf{height:100%;border-radius:2px;}
+.lt{font-size:9px;color:var(--text3);background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:1px 6px;margin-top:2px;display:inline-block;}
+.kgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px;}
+.kc{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:8px 10px;cursor:pointer;transition:border-color .15s;}
+.kc:hover{border-color:var(--border2);}
+.kc.done{border-color:var(--green);}
+.knum{font-size:9px;color:var(--text3);margin-bottom:1px;}
+.knm{font-size:11px;font-weight:600;margin-bottom:1px;}
+.kco{font-size:10px;color:var(--text3);}
+.kbd{display:inline-block;font-size:9px;border-radius:8px;padding:1px 6px;margin-top:2px;}
+.bd-ok{background:#1a4a1a;color:var(--green2);border:1px solid var(--green);}
+.bd-no{background:var(--bg);color:var(--text3);border:1px solid var(--border);}
+.bgo{display:block;width:100%;padding:10px;background:var(--bg3);border:1.5px solid var(--green);border-radius:9px;color:var(--green3);font-size:13px;font-weight:600;cursor:pointer;}
+.bgo:hover{background:var(--bg4);}
+ 
+/* ── RACE SCREEN (layout fixo) ── */
+#scr-race{display:none;flex-direction:column;height:calc(100vh - 38px);overflow:hidden;}
+#scr-race.on{display:flex;}
+ 
+/* Pista: altura fija, não cresce */
+#track-area{position:relative;flex-shrink:0;height:220px;background:#1c3a1c;overflow:hidden;}
+#rc{display:block;position:absolute;top:0;left:0;}
+ 
+/* HUD linha */
+#rhud{display:flex;align-items:center;gap:6px;padding:4px 10px;background:#060e06;border-top:1px solid var(--border);flex-shrink:0;flex-wrap:wrap;font-size:11px;}
+.ri{display:flex;align-items:center;gap:3px;}
+.rl{color:var(--text3);}.rv{font-weight:600;color:var(--text2);}
+.rsep{width:1px;height:11px;background:var(--border);}
+ 
+/* Barra progresso */
+#pgrow{display:flex;align-items:center;gap:6px;padding:3px 10px;background:var(--bg);flex-shrink:0;}
+.pgo{flex:1;height:5px;background:var(--bg2);border-radius:3px;overflow:hidden;border:1px solid var(--border);}
+.pgi{height:100%;background:var(--green);border-radius:3px;transition:width .3s;}
+ 
+/* Painel exercício/cartel — área rolável */
+#panel-area{flex:1;overflow-y:auto;min-height:0;}
+ 
 #bb-panel,#ex-panel{display:none;padding:10px 12px;border-top:2px solid;}
 #bb-panel{border-color:var(--green);background:var(--bg2);}
 #ex-panel{border-color:var(--amber);background:var(--bg2);}
 #bb-panel.vis,#ex-panel.vis{display:block;}
-.ov-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
-.ov-t{font-size:13px;font-weight:600;color:var(--text2);}
-.ov-cont{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:3px 12px;font-size:11px;color:var(--green2);cursor:pointer;}
-.ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.ov-th{font-size:12px;color:var(--text);line-height:1.6;}
-.ov-th b{color:var(--text2);}
-.ov-th ul{padding-left:14px;margin-top:3px;}
-.ov-th li{margin-bottom:2px;}
-.cbox{background:#040a04;border:1px solid var(--border);border-radius:7px;padding:9px;font-family:var(--font-mono);font-size:11px;color:var(--text);line-height:1.7;}
+.ovhd{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.ovt{font-size:13px;font-weight:600;color:var(--text2);}
+.ovcont{background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:3px 12px;font-size:11px;color:var(--green2);cursor:pointer;}
+.ovgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.ovth{font-size:12px;color:var(--text);line-height:1.6;}
+.ovth b{color:var(--text2);}
+.ovth ul{padding-left:14px;margin-top:3px;}
+.ovth li{margin-bottom:2px;}
+.cbox{background:#040a04;border:1px solid var(--border);border-radius:7px;padding:8px;font-family:var(--mono);font-size:11px;color:var(--text);line-height:1.7;}
 .kw{color:var(--blue);}.st{color:var(--green2);}.nm{color:var(--amber);}.cm{color:var(--text3);}.fn{color:var(--purple);}
-.ex-q{font-size:13px;font-weight:600;color:#f4e0b0;margin-bottom:5px;line-height:1.4;}
-.ex-ht{font-size:11px;color:#8a6040;margin-bottom:7px;}
-.opts{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:7px;}
-.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:5px 13px;font-size:12px;color:var(--text);cursor:pointer;font-family:var(--font-mono);}
+.exq{font-size:13px;font-weight:600;color:#f4e0b0;margin-bottom:4px;line-height:1.4;}
+.exht{font-size:11px;color:#8a6040;margin-bottom:6px;}
+.opts{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:6px;}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:7px;padding:4px 12px;font-size:12px;color:var(--text);cursor:pointer;font-family:var(--mono);}
 .opt:hover{border-color:var(--border2);}
 .opt.sel{border-color:var(--green);color:var(--green3);}
 .opt.cor{background:#1a4a1a;border-color:var(--green);color:var(--green3);}
 .opt.wrg{background:#2a1010;border-color:var(--red2);color:var(--red);}
-.fb{font-size:12px;border-radius:7px;padding:7px 10px;margin-top:5px;display:none;line-height:1.4;}
+.fb{font-size:12px;border-radius:7px;padding:6px 10px;margin-top:5px;display:none;line-height:1.4;}
 .fb.ok{display:block;background:#1a4a1a;border:1px solid var(--green);color:var(--green3);}
 .fb.err{display:block;background:#2a1010;border:1px solid #7a3a3a;color:var(--red);}
-.ex-btns{display:flex;gap:7px;margin-top:4px;}
-.btn-ver{background:var(--bg3);border:1.5px solid var(--green);border-radius:7px;padding:6px 18px;font-size:12px;font-weight:600;color:var(--green3);cursor:pointer;}
-.btn-ver:hover{background:var(--bg4);}
-.btn-sk{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:6px 12px;font-size:11px;color:var(--text3);cursor:pointer;}
-
-/* EDITOR */
-.mis-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin-bottom:10px;}
-.mis-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:9px;padding:9px;cursor:pointer;}
-.mis-card:hover{border-color:var(--border2);}
-.mis-card.am{border-color:var(--green);}
-.mn{font-size:9px;color:var(--text3);margin-bottom:2px;}
-.mt{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:2px;}
-.md{font-size:10px;color:var(--text3);line-height:1.35;}
-.mx{font-size:9px;color:var(--amber);margin-top:3px;}
-.ed-wrap{display:grid;grid-template-columns:1fr 1fr;gap:9px;min-height:260px;}
-.ep{background:#040a04;border:1px solid var(--border);border-radius:9px;overflow:hidden;display:flex;flex-direction:column;}
-.ep-hd{display:flex;align-items:center;gap:5px;padding:5px 9px;background:var(--bg2);border-bottom:1px solid var(--border);font-size:11px;color:var(--text3);flex-shrink:0;}
-.dot3{display:flex;gap:3px;}.dot{width:7px;height:7px;border-radius:50%;}
-textarea#cta{flex:1;width:100%;background:#040a04;border:none;outline:none;resize:none;font-family:var(--font-mono);font-size:12px;color:var(--green2);padding:9px;line-height:1.7;caret-color:var(--green3);}
-#obox{padding:9px;font-family:var(--font-mono);font-size:11px;color:var(--text);line-height:1.7;flex:1;white-space:pre-wrap;word-break:break-all;overflow-y:auto;}
+.exbtns{display:flex;gap:6px;margin-top:5px;}
+.bver{background:var(--bg3);border:1.5px solid var(--green);border-radius:7px;padding:5px 16px;font-size:12px;font-weight:600;color:var(--green3);cursor:pointer;}
+.bver:hover{background:var(--bg4);}
+.bsk{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:5px 11px;font-size:11px;color:var(--text3);cursor:pointer;}
+ 
+/* "Pressione iniciar" overlay */
+#start-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);z-index:10;}
+#start-overlay button{background:var(--bg3);border:2px solid var(--green);border-radius:12px;padding:12px 30px;font-size:15px;font-weight:700;color:var(--green3);cursor:pointer;}
+ 
+/* ── EDITOR ── */
+.mgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:9px;}
+.mc{background:var(--bg2);border:1.5px solid var(--border);border-radius:8px;padding:8px;cursor:pointer;}
+.mc:hover{border-color:var(--border2);}
+.mc.am{border-color:var(--green);}
+.mn_{font-size:9px;color:var(--text3);margin-bottom:2px;}
+.mt_{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:1px;}
+.md_{font-size:10px;color:var(--text3);line-height:1.3;}
+.mx_{font-size:9px;margin-top:3px;}
+.ewrap{display:grid;grid-template-columns:1fr 1fr;gap:8px;height:240px;}
+.ep{background:#040a04;border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;}
+.ephd{display:flex;align-items:center;gap:5px;padding:4px 8px;background:var(--bg2);border-bottom:1px solid var(--border);font-size:11px;color:var(--text3);flex-shrink:0;}
+.d3{display:flex;gap:3px;}.dot{width:7px;height:7px;border-radius:50%;}
+textarea#cta{flex:1;width:100%;background:#040a04;border:none;outline:none;resize:none;font-family:var(--mono);font-size:12px;color:var(--green2);padding:8px;line-height:1.65;caret-color:var(--green3);}
+#obox{padding:8px;font-family:var(--mono);font-size:11px;color:var(--text);line-height:1.65;flex:1;white-space:pre-wrap;word-break:break-all;overflow-y:auto;}
 #obox.err{color:var(--red);}
-.ed-btns{display:flex;gap:7px;margin-top:9px;align-items:center;flex-wrap:wrap;}
-#hint-box{margin-top:8px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px;font-size:12px;display:none;}
-
-/* RANKING */
-.rank-wrap{overflow-x:auto;}
+.ebtns{display:flex;gap:6px;margin-top:8px;align-items:center;flex-wrap:wrap;}
+#hintbox{margin-top:7px;background:var(--bg2);border:1px solid var(--border);border-radius:7px;padding:7px;font-size:12px;display:none;}
+ 
+/* ── RANKING ── */
+.rwrap{overflow-x:auto;}
 table.rt{width:100%;border-collapse:collapse;}
-.rt th{font-size:10px;color:var(--text3);font-weight:500;padding:5px 9px;text-align:left;border-bottom:1px solid var(--border);}
-.rt td{font-size:12px;padding:6px 9px;border-bottom:1px solid var(--bg3);color:var(--text);}
+.rt th{font-size:10px;color:var(--text3);font-weight:500;padding:5px 8px;text-align:left;border-bottom:1px solid var(--border);}
+.rt td{font-size:12px;padding:5px 8px;border-bottom:1px solid var(--bg3);color:var(--text);}
 .rt tr.me td{color:var(--green3);background:var(--bg3);}
 .rxp{color:var(--amber2);font-weight:600;}.rlv{color:var(--blue);}.rst{color:var(--amber);}
-.daily-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;}
-.dc{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:9px;}
-.dt{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:2px;}
-.dd{font-size:10px;color:var(--text3);margin-bottom:5px;line-height:1.35;}
-.dpb{height:4px;background:var(--bg);border-radius:2px;margin-bottom:3px;overflow:hidden;}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px;}
+.dc{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px;}
+.dt_{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:1px;}
+.dd_{font-size:10px;color:var(--text3);margin-bottom:4px;line-height:1.3;}
+.dpb{height:3px;background:var(--bg);border-radius:2px;margin-bottom:3px;overflow:hidden;}
 .dpf{height:100%;border-radius:2px;}
-.dx{font-size:10px;color:var(--amber);}
-
-/* TROPHIES */
-.tr-g{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
-.tr-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center;}
-.tr-card.earned{border-color:var(--amber);}
-.tr-card.locked-t .ti{filter:grayscale(1);opacity:.3;}
-.ti{font-size:26px;margin-bottom:5px;}
+.dx_{font-size:10px;color:var(--amber);}
+ 
+/* ── LOGROS ── */
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.tc{background:var(--bg2);border:1px solid var(--border);border-radius:9px;padding:11px;text-align:center;}
+.tc.earned{border-color:var(--amber);}
+.tc.lkt .tic{filter:grayscale(1);opacity:.3;}
+.tic{font-size:24px;margin-bottom:4px;}
 .tnm{font-size:11px;font-weight:600;color:var(--text2);margin-bottom:2px;}
 .tds{font-size:10px;color:var(--text3);}
-
-/* MODAL */
-#modal-wrap{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:center;justify-content:center;}
-#modal-wrap.open{display:flex;}
-#modal{background:var(--bg2);border:1.5px solid var(--green);border-radius:14px;padding:22px;max-width:440px;width:90%;text-align:center;}
-#modal h2{font-size:19px;color:var(--text2);margin-bottom:7px;}
-#modal p{font-size:13px;color:var(--text);margin-bottom:14px;line-height:1.5;}
-.mic{font-size:36px;margin-bottom:10px;}
+ 
+/* ── MODAL ── */
+#mwrap{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:none;align-items:center;justify-content:center;}
+#mwrap.open{display:flex;}
+#modal{background:var(--bg2);border:1.5px solid var(--green);border-radius:13px;padding:20px;max-width:420px;width:90%;text-align:center;}
+#modal h2{font-size:18px;color:var(--text2);margin-bottom:6px;}
+#modal p{font-size:13px;color:var(--text);margin-bottom:13px;line-height:1.5;}
+.mic{font-size:34px;margin-bottom:9px;}
 </style>
 </head>
 <body>
 <div id="app">
-
+ 
+<!-- NAV -->
 <div id="nav">
-  <button class="nav-btn active" onclick="go('garage')">🏠 Garaje</button>
-  <button class="nav-btn" onclick="go('race')">🏁 Carrera</button>
-  <button class="nav-btn" onclick="go('editor')">💻 Editor</button>
-  <button class="nav-btn" onclick="go('ranking')">🏆 Ranking</button>
-  <button class="nav-btn" onclick="go('trophy')">🎖️ Logros</button>
-  <div class="nav-sp"></div>
+  <button class="nb on" onclick="go('garage')">🏠 Garaje</button>
+  <button class="nb" onclick="go('race')">🏁 Carrera</button>
+  <button class="nb" onclick="go('editor')">💻 Editor</button>
+  <button class="nb" onclick="go('ranking')">🏆 Ranking</button>
+  <button class="nb" onclick="go('trophy')">🎖️ Logros</button>
+  <div class="nsp"></div>
   <div class="hud">
-    <span class="hud-lv" id="hlv">Nv 1</span>
-    <div class="hud-sep"></div>
-    <span style="color:var(--text3);font-size:11px">XP</span>
+    <span class="hlv" id="hlv">Nv 1</span>
+    <div class="hsep"></div>
+    <span style="color:var(--text3);font-size:10px">XP</span>
     <span style="color:var(--amber2);font-weight:600;font-size:12px" id="hxp">0</span>
-    <div class="hud-sep"></div>
-    <span style="color:var(--amber);font-size:12px" id="hco">🪙 0</span>
-    <div class="hud-sep"></div>
-    <span style="color:var(--amber);font-size:11px" id="hst">🔥 0d</span>
+    <div class="hsep"></div>
+    <span style="color:var(--amber);font-size:11px" id="hco">🪙0</span>
+    <div class="hsep"></div>
+    <span style="color:var(--amber);font-size:11px" id="hst">🔥0d</span>
   </div>
 </div>
-
-<!-- GARAGE -->
-<div class="screen active" id="screen-garage">
+ 
+<!-- GARAJE -->
+<div class="scr on" id="scr-garage">
 <div class="si">
-  <div class="sec">🚗 Mi garaje</div>
-  <div class="car-grid" id="car-grid"></div>
-  <div class="sec">🗺️ Circuitos disponibles</div>
-  <div class="circ-grid" id="circ-grid"></div>
-  <button class="btn-go" onclick="go('race');startRace()">▶ Iniciar carrera</button>
+  <div class="sec">🚗 Mi garaje — elige tu auto</div>
+  <div class="cgrid" id="car-grid"></div>
+  <div class="sec">🗺️ Circuitos</div>
+  <div class="kgrid" id="circ-grid"></div>
+  <button class="bgo" onclick="go('race');startRace()">▶ Iniciar carrera</button>
 </div>
 </div>
-
-<!-- RACE -->
-<div class="screen" id="screen-race">
-<div id="track-wrap"><canvas id="rc"></canvas></div>
-<div id="race-hud">
-  <div class="rhi"><span class="rhl">Circuito</span><span class="rhv" id="rh-ci">—</span></div>
-  <div class="hud-sep"></div>
-  <div class="rhi"><span class="rhl">Pos</span><span class="rhv" id="rh-po">—</span></div>
-  <div class="hud-sep"></div>
-  <div class="rhi"><span class="rhl">Vuelta</span><span class="rhv" id="rh-lp">1/3</span></div>
-  <div class="hud-sep"></div>
-  <div class="rhi"><span class="rhv" style="color:var(--amber2)" id="rh-sp">—</span></div>
-  <div class="hud-sep"></div>
-  <div class="rhi" id="rh-st" style="color:var(--green)">Listo</div>
-  <div class="nav-sp"></div>
-  <button onclick="stopRace();go('garage')" style="background:#1a0808;border:1px solid #5a1a1a;border-radius:6px;padding:3px 10px;font-size:11px;color:#cc6060;cursor:pointer;">Abandonar</button>
-</div>
-<div id="pg-row">
-  <span style="font-size:10px;color:var(--text3);min-width:55px" id="pg-pct">0%</span>
-  <div class="pg-out"><div class="pg-in" id="pg-in" style="width:0%"></div></div>
-  <span style="font-size:10px;color:var(--text3);min-width:110px;text-align:right" id="pg-nx">—</span>
-</div>
-<div id="overlays">
-  <div id="bb-panel">
-    <div class="ov-hd">
-      <div class="ov-t">📋 <span id="bb-ti">—</span></div>
-      <button class="ov-cont" onclick="closeOv()">▶ Continuar carrera</button>
-    </div>
-    <div class="ov-grid">
-      <div class="ov-th" id="bb-th"></div>
-      <div class="cbox" id="bb-co"></div>
+ 
+<!-- CARRERA -->
+<div class="scr" id="scr-race">
+  <!-- PISTA FIJA 220px -->
+  <div id="track-area">
+    <canvas id="rc"></canvas>
+    <div id="start-overlay">
+      <button onclick="hideOverlay();startRace()">🏎️ ¡Arrancar!</button>
     </div>
   </div>
-  <div id="ex-panel">
-    <div class="ov-hd">
-      <div class="ov-t" style="color:var(--amber)">⚡ <span id="ex-ti">—</span></div>
-      <button class="btn-sk" onclick="skipEx()">Saltar (−10 XP)</button>
+ 
+  <!-- HUD -->
+  <div id="rhud">
+    <div class="ri"><span class="rl">Circuito</span><span class="rv" id="rci">—</span></div>
+    <div class="rsep"></div>
+    <div class="ri"><span class="rl">Pos</span><span class="rv" id="rpo">—</span></div>
+    <div class="rsep"></div>
+    <div class="ri"><span class="rl">Vuelta</span><span class="rv" id="rlp">1/3</span></div>
+    <div class="rsep"></div>
+    <div class="ri"><span class="rv" style="color:var(--amber2)" id="rsp">—</span></div>
+    <div class="rsep"></div>
+    <div class="ri" id="rst" style="color:var(--green)">Listo</div>
+    <div class="nsp"></div>
+    <button onclick="stopRace();go('garage')" style="background:#1a0808;border:1px solid #5a1a1a;border-radius:5px;padding:2px 9px;font-size:11px;color:#cc6060;cursor:pointer;">Salir</button>
+  </div>
+ 
+  <!-- PROGRESO -->
+  <div id="pgrow">
+    <span style="font-size:10px;color:var(--text3);min-width:50px" id="pgpct">0%</span>
+    <div class="pgo"><div class="pgi" id="pgin" style="width:0%"></div></div>
+    <span style="font-size:10px;color:var(--text3);min-width:100px;text-align:right" id="pgnx">—</span>
+  </div>
+ 
+  <!-- PANELES (ejercicios / carteles) -->
+  <div id="panel-area">
+    <div id="bb-panel">
+      <div class="ovhd">
+        <div class="ovt">📋 <span id="bbti">—</span></div>
+        <button class="ovcont" onclick="closeOv()">▶ Continuar carrera</button>
+      </div>
+      <div class="ovgrid">
+        <div class="ovth" id="bbth"></div>
+        <div class="cbox" id="bbco"></div>
+      </div>
     </div>
-    <div class="ex-q" id="ex-q"></div>
-    <div class="ex-ht" id="ex-ht"></div>
-    <div class="cbox" id="ex-co" style="margin-bottom:7px;"></div>
-    <div class="opts" id="ex-opts"></div>
-    <div class="ex-btns">
-      <button class="btn-ver" onclick="checkAns()">✓ Verificar</button>
-      <button class="btn-sk" onclick="skipEx()">Continuar sin resolver</button>
+    <div id="ex-panel">
+      <div class="ovhd">
+        <div class="ovt" style="color:var(--amber)">⚡ <span id="exti">—</span></div>
+        <button class="bsk" onclick="skipEx()">Saltar (−10 XP)</button>
+      </div>
+      <div class="exq" id="exq"></div>
+      <div class="exht" id="exht"></div>
+      <div class="cbox" id="exco" style="margin-bottom:6px;font-size:11px;"></div>
+      <div class="opts" id="exopts"></div>
+      <div class="exbtns">
+        <button class="bver" onclick="checkAns()">✓ Verificar</button>
+        <button class="bsk" onclick="skipEx()">Continuar sin resolver</button>
+      </div>
+      <div class="fb" id="fbok"></div>
+      <div class="fb" id="fberr"></div>
     </div>
-    <div class="fb" id="fb-ok"></div>
-    <div class="fb" id="fb-err"></div>
   </div>
 </div>
-</div>
-
+ 
 <!-- EDITOR -->
-<div class="screen" id="screen-editor">
+<div class="scr" id="scr-editor">
 <div class="si">
   <div class="sec">💻 Misiones de código Python</div>
-  <div class="mis-grid" id="mis-grid"></div>
-  <div class="ed-wrap">
+  <div class="mgrid" id="mis-grid"></div>
+  <div class="ewrap">
     <div class="ep">
-      <div class="ep-hd">
-        <div class="dot3"><div class="dot" style="background:#cc4444"></div><div class="dot" style="background:var(--amber)"></div><div class="dot" style="background:var(--green)"></div></div>
-        <span>mi_codigo.py</span>
-        <span style="margin-left:auto;font-size:10px" id="ed-lbl">—</span>
+      <div class="ephd">
+        <div class="d3"><div class="dot" style="background:#cc4444"></div><div class="dot" style="background:var(--amber)"></div><div class="dot" style="background:var(--green)"></div></div>
+        <span>mi_codigo.py</span><span style="margin-left:auto;font-size:10px" id="edlbl">—</span>
       </div>
       <textarea id="cta" spellcheck="false"></textarea>
     </div>
     <div class="ep">
-      <div class="ep-hd"><span>▶ Salida</span><span style="margin-left:auto;font-size:10px" id="ed-st"></span></div>
+      <div class="ephd"><span>▶ Salida</span><span style="margin-left:auto;font-size:10px" id="edst"></span></div>
       <div id="obox">Presiona Ejecutar...</div>
     </div>
   </div>
-  <div class="ed-btns">
-    <button class="btn-ver" onclick="runCode()">▶ Ejecutar</button>
-    <button class="btn-sk" onclick="clearEd()">Limpiar</button>
-    <button class="btn-sk" onclick="showHint()">💡 Pista</button>
+  <div class="ebtns">
+    <button class="bver" onclick="runCode()">▶ Ejecutar</button>
+    <button class="bsk" onclick="clearEd()">Limpiar</button>
+    <button class="bsk" onclick="showHint()">💡 Pista</button>
   </div>
-  <div id="hint-box"></div>
+  <div id="hintbox"></div>
 </div>
 </div>
-
+ 
 <!-- RANKING -->
-<div class="screen" id="screen-ranking">
+<div class="scr" id="scr-ranking">
 <div class="si">
   <div class="sec">🏆 Ranking del curso</div>
-  <div class="rank-wrap"><table class="rt"><thead><tr><th>Pos</th><th>Piloto</th><th>XP</th><th>Nv</th><th>Victorias</th><th>Racha</th></tr></thead><tbody id="rank-body"></tbody></table></div>
-  <div class="sec" style="margin-top:14px;">📅 Misiones del día</div>
-  <div class="daily-g" id="daily-g"></div>
+  <div class="rwrap"><table class="rt"><thead><tr><th>Pos</th><th>Piloto</th><th>XP</th><th>Nv</th><th>Victorias</th><th>Racha</th></tr></thead><tbody id="rbody"></tbody></table></div>
+  <div class="sec" style="margin-top:12px">📅 Misiones del día</div>
+  <div class="dg" id="dg"></div>
 </div>
 </div>
-
-<!-- TROPHIES -->
-<div class="screen" id="screen-trophy">
+ 
+<!-- LOGROS -->
+<div class="scr" id="scr-trophy">
 <div class="si">
   <div class="sec">🎖️ Mis logros</div>
-  <div class="tr-g" id="tr-g"></div>
+  <div class="tg" id="tg"></div>
 </div>
 </div>
-
-</div><!-- end app -->
-
-<div id="modal-wrap">
+ 
+</div><!-- fin app -->
+ 
+<!-- MODAL -->
+<div id="mwrap">
 <div id="modal">
   <div class="mic" id="mic">🏆</div>
   <h2 id="mti">—</h2>
   <p id="mms">—</p>
-  <button class="btn-ver" onclick="closeModal()">¡Continuar!</button>
+  <button class="bver" onclick="closeMod()">¡Continuar!</button>
 </div>
 </div>
-
+ 
 <script>
-// ===================== DATOS =====================
+// ═══════════════════════ DATOS ═══════════════════════
 const CARS=[
-  {id:0,name:'Turbo Python',color:'#5bc8f5',acc:'#a8e8ff',spd:6,ac:6,locked:false,xpR:0,desc:'Auto de inicio'},
-  {id:1,name:'Shadow GT',color:'#cc4444',acc:'#f09090',spd:7,ac:7,locked:true,xpR:300,desc:'Motor agresivo'},
-  {id:2,name:'Rocket R1',color:'#ffd166',acc:'#fff0a0',spd:8,ac:8,locked:true,xpR:800,desc:'Pura velocidad'},
-  {id:3,name:'Ghost 404',color:'#c9a0ff',acc:'#e8d8ff',spd:9,ac:8,locked:true,xpR:1800,desc:'Auto misterioso'},
-  {id:4,name:'ByteBreaker',color:'#f4a261',acc:'#ffe0c0',spd:9,ac:9,locked:true,xpR:3500,desc:'Ex-auto del villano'},
-  {id:5,name:'Code Legend',color:'#85e89d',acc:'#c8f8d0',spd:10,ac:10,locked:true,xpR:6000,desc:'Solo para campeones'},
+  {id:0,nm:'Turbo Python',col:'#5bc8f5',acc:'#a8e8ff',spd:6,ac:6,lk:false,xr:0,ds:'Auto de inicio'},
+  {id:1,nm:'Shadow GT',col:'#cc4444',acc:'#f09090',spd:7,ac:7,lk:true,xr:300,ds:'Motor agresivo'},
+  {id:2,nm:'Rocket R1',col:'#ffd166',acc:'#fff0a0',spd:8,ac:8,lk:true,xr:800,ds:'Pura velocidad'},
+  {id:3,nm:'Ghost 404',col:'#c9a0ff',acc:'#e8d8ff',spd:9,ac:8,lk:true,xr:1800,ds:'Auto misterioso'},
+  {id:4,nm:'ByteBreaker',col:'#f4a261',acc:'#ffe0c0',spd:9,ac:9,lk:true,xr:3500,ds:'Ex-auto del villano'},
+  {id:5,nm:'Code Legend',col:'#85e89d',acc:'#c8f8d0',spd:10,ac:10,lk:true,xr:6000,ds:'Solo para campeones'},
 ];
 const CIRCS=[
-  {id:0,name:'Pista de Combustible',concept:'Variables & tipos',color:'#79b8ff'},
-  {id:1,name:'Curvas de Decisión',concept:'Condicionales if/elif/else',color:'#85e89d'},
-  {id:2,name:'Vueltas Infinitas',concept:'Bucles for & while',color:'#c9a0ff'},
-  {id:3,name:'Motor Turbo',concept:'Funciones & parámetros',color:'#f4a261'},
-  {id:4,name:'El Garaje',concept:'Listas & métodos',color:'#f78fb3'},
-  {id:5,name:'Stats del Corredor',concept:'Diccionarios',color:'#5dcaa5'},
-  {id:6,name:'Taller de Reparación',concept:'Try / Except',color:'#ffd166'},
-  {id:7,name:'Gran Premio Final',concept:'Proyecto integrado',color:'#e0a0ff'},
+  {nm:'Pista de Combustible',co:'Variables & tipos',cl:'#79b8ff'},
+  {nm:'Curvas de Decisión',co:'Condicionales if/elif/else',cl:'#85e89d'},
+  {nm:'Vueltas Infinitas',co:'Bucles for & while',cl:'#c9a0ff'},
+  {nm:'Motor Turbo',co:'Funciones & parámetros',cl:'#f4a261'},
+  {nm:'El Garaje',co:'Listas & métodos',cl:'#f78fb3'},
+  {nm:'Stats del Corredor',co:'Diccionarios',cl:'#5dcaa5'},
+  {nm:'Taller de Reparación',co:'Try / Except',cl:'#ffd166'},
+  {nm:'Gran Premio Final',co:'Proyecto integrado',cl:'#e0a0ff'},
 ];
 const BB=[
-  [{title:'Variables — cajones de datos',th:'<b>Una variable</b> guarda información con un nombre.<br><br><b>Tipos:</b><ul><li><b>int</b> — enteros: velocidad = 120</li><li><b>float</b> — decimales: 99.5</li><li><b>str</b> — texto: "Turbo Py"</li><li><b>bool</b> — True / False</li></ul>',co:'<span class="cm"># Tu auto</span>\nvelocidad = <span class="nm">120</span>\ncombustible = <span class="nm">99.5</span>\nnombre = <span class="st">"Turbo Python"</span>\nactivo = <span class="kw">True</span>\n<span class="kw">print</span>(nombre, velocidad)'},
-   {title:'Operaciones con variables',th:'<b>Matemáticas</b> con variables numéricas:<br><ul><li><code>+</code> suma &nbsp; <code>-</code> resta</li><li><code>*</code> multiplicar &nbsp; <code>/</code> dividir</li><li><code>**</code> potencia</li><li><code>+=</code> suma y asigna</li></ul>',co:'velocidad = <span class="nm">100</span>\nboost = <span class="nm">30</span>\nvel_final = velocidad + boost\n<span class="kw">print</span>(vel_final)  <span class="cm"># 130</span>\n\ncombustible = <span class="nm">100</span>\ncombustible -= <span class="nm">15</span>\n<span class="kw">print</span>(combustible) <span class="cm"># 85</span>'}],
-  [{title:'Condicionales — if / else',th:'<b>Tu auto toma decisiones</b> según la pista.<br><br><ul><li><b>if</b> — si la condición es verdadera</li><li><b>else</b> — si no lo es</li></ul><br><b>Operadores:</b> &gt; &lt; == != &gt;= &lt;=',co:'combustible = <span class="nm">35</span>\n<span class="kw">if</span> combustible &gt; <span class="nm">50</span>:\n    maniobra = <span class="st">"boost"</span>\n<span class="kw">else</span>:\n    maniobra = <span class="st">"pit stop"</span>\n<span class="kw">print</span>(maniobra)'},
-   {title:'Condicionales — elif',th:'<b>elif</b> agrega más condiciones.<br><br>Python las evalúa en orden y ejecuta la <b>primera verdadera</b>.',co:'velocidad = <span class="nm">145</span>\n<span class="kw">if</span> velocidad &gt; <span class="nm">160</span>:\n    aviso = <span class="st">"peligro"</span>\n<span class="kw">elif</span> velocidad &gt; <span class="nm">120</span>:\n    aviso = <span class="st">"precaucion"</span>\n<span class="kw">else</span>:\n    aviso = <span class="st">"lento"</span>\n<span class="kw">print</span>(aviso)'}],
-  [{title:'Bucle for — vueltas exactas',th:'<b>for</b> repite un número exacto de veces.<br><br><code>range(n)</code> genera 0 hasta n-1.<br><br>Cada repetición = una <b>iteración</b>.',co:'<span class="kw">for</span> vuelta <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">5</span>):\n    combustible -= <span class="nm">10</span>\n    <span class="kw">print</span>(<span class="st">f"Vuelta {vuelta+1}: {combustible}L"</span>)'},
-   {title:'Bucle while — mientras sea verdad',th:'<b>while</b> repite <b>mientras</b> la condición sea True.<br><br>⚠️ Si la condición nunca es False → bucle infinito.',co:'combustible = <span class="nm">100</span>\n<span class="kw">while</span> combustible &gt; <span class="nm">0</span>:\n    combustible -= <span class="nm">20</span>\n    <span class="kw">print</span>(<span class="st">f"Quedan {combustible}L"</span>)\n<span class="kw">print</span>(<span class="st">"Sin combustible"</span>)'}],
-  [{title:'Funciones — poderes del auto',th:'<b>Una función</b> es un bloque de código reutilizable.<br><ul><li><code>def</code> — define la función</li><li><b>parámetros</b> — datos de entrada</li><li><code>return</code> — devuelve el resultado</li></ul>',co:'<span class="kw">def</span> <span class="fn">turbo_boost</span>(vel, fuel):\n    <span class="kw">if</span> fuel &gt; <span class="nm">40</span>:\n        <span class="kw">return</span> vel + <span class="nm">30</span>\n    <span class="kw">return</span> vel\n\nresult = <span class="fn">turbo_boost</span>(<span class="nm">100</span>, <span class="nm">60</span>)\n<span class="kw">print</span>(result) <span class="cm"># 130</span>'},
-   {title:'Funciones con múltiples parámetros',th:'Las funciones pueden recibir <b>varios parámetros</b> y devolver cualquier tipo de dato.',co:'<span class="kw">def</span> <span class="fn">estado_auto</span>(vel, fuel):\n    nivel = <span class="st">"ok"</span>\n    <span class="kw">if</span> fuel &lt; <span class="nm">20</span>:\n        nivel = <span class="st">"critico"</span>\n    <span class="kw">elif</span> vel &gt; <span class="nm">200</span>:\n        nivel = <span class="st">"peligro"</span>\n    <span class="kw">return</span> nivel\n<span class="kw">print</span>(<span class="fn">estado_auto</span>(<span class="nm">150</span>, <span class="nm">10</span>))'}],
-  [{title:'Listas — tu garaje',th:'<b>Una lista</b> guarda múltiples valores ordenados.<br><ul><li>Índices desde <b>0</b></li><li><code>.append(x)</code> añade al final</li><li><code>.remove(x)</code> elimina</li><li><code>len(lista)</code> cuenta elementos</li></ul>',co:'garaje = [<span class="st">"Turbo"</span>, <span class="st">"Shadow"</span>]\ngaraje.<span class="fn">append</span>(<span class="st">"Rocket"</span>)\n<span class="kw">print</span>(garaje[<span class="nm">0</span>])  <span class="cm"># Turbo</span>\n<span class="kw">print</span>(<span class="fn">len</span>(garaje))  <span class="cm"># 3</span>'},
-   {title:'Recorrer listas con for',th:'Usa <b>for</b> para procesar cada elemento de una lista automáticamente.',co:'mejoras = [<span class="st">"turbo"</span>, <span class="st">"nitro"</span>, <span class="st">"blindaje"</span>]\n\n<span class="kw">for</span> mejora <span class="kw">in</span> mejoras:\n    <span class="kw">print</span>(<span class="st">f"Instalando: {mejora}"</span>)'}],
-  [{title:'Diccionarios — ficha del corredor',th:'<b>Diccionario</b> = pares clave:valor entre <code>{ }</code>.<br><ul><li>Accede por nombre, no posición</li><li><code>d["clave"]</code> lee</li><li><code>d["clave"] = x</code> asigna</li></ul>',co:'corredor = {\n    <span class="st">"nombre"</span>: <span class="st">"Piloto_42"</span>,\n    <span class="st">"victorias"</span>: <span class="nm">14</span>,\n    <span class="st">"nivel"</span>: <span class="nm">5</span>\n}\n<span class="kw">print</span>(corredor[<span class="st">"nombre"</span>])\ncorredor[<span class="st">"victorias"</span>] += <span class="nm">1</span>'},
-   {title:'Recorrer diccionarios',th:'<code>.items()</code> devuelve cada par clave-valor.<br><br>Muy útil para imprimir stats del corredor.',co:'stats = {<span class="st">"vel"</span>:<span class="nm">180</span>, <span class="st">"fuel"</span>:<span class="nm">75</span>}\n\n<span class="kw">for</span> stat, valor <span class="kw">in</span> stats.<span class="fn">items</span>():\n    <span class="kw">print</span>(<span class="st">f"{stat}: {valor}"</span>)'}],
-  [{title:'Try/Except — mecánico de errores',th:'<b>try/except</b> protege tu código de errores.<br><ul><li><b>try</b> — intenta esto</li><li><b>except</b> — si falla, haz esto</li><li><b>finally</b> — siempre ejecuta</li></ul>',co:'<span class="kw">try</span>:\n    vel = <span class="fn">int</span>(<span class="st">"rapido"</span>)  <span class="cm"># error!</span>\n<span class="kw">except</span> ValueError:\n    vel = <span class="nm">0</span>\n    <span class="kw">print</span>(<span class="st">"Sensor dañado"</span>)\n<span class="kw">finally</span>:\n    <span class="kw">print</span>(<span class="st">"Revision OK"</span>)'},
-   {title:'Tipos de errores comunes',th:'<ul><li><b>ValueError</b> — dato incorrecto</li><li><b>ZeroDivisionError</b> — división por cero</li><li><b>IndexError</b> — índice fuera de rango</li><li><b>KeyError</b> — clave no existe</li></ul>',co:'<span class="kw">try</span>:\n    x = <span class="nm">100</span> / <span class="nm">0</span>\n<span class="kw">except</span> ZeroDivisionError:\n    <span class="kw">print</span>(<span class="st">"No dividas por cero"</span>)\n\n<span class="kw">try</span>:\n    lista = [<span class="nm">1</span>,<span class="nm">2</span>]\n    print(lista[<span class="nm">5</span>])\n<span class="kw">except</span> IndexError:\n    <span class="kw">print</span>(<span class="st">"Indice invalido"</span>)'}],
-  [{title:'Proyecto final — todo junto',th:'¡Usarás <b>TODOS los conceptos</b> juntos!<br><ul><li>Variables + f-strings</li><li>Funciones con parámetros</li><li>Bucles for</li><li>Listas y diccionarios</li><li>Condicionales + try/except</li></ul>',co:'<span class="cm"># Sistema completo</span>\nauto = {<span class="st">"vel"</span>:<span class="nm">120</span>, <span class="st">"fuel"</span>:<span class="nm">100</span>}\n\n<span class="kw">def</span> <span class="fn">vuelta</span>(auto, n):\n    auto[<span class="st">"fuel"</span>] -= <span class="nm">15</span>\n    <span class="kw">if</span> auto[<span class="st">"fuel"</span>] &lt; <span class="nm">20</span>:\n        <span class="kw">return</span> <span class="st">"PIT STOP"</span>\n    <span class="kw">return</span> <span class="st">f"Vuelta {n} OK"</span>\n\n<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>,<span class="nm">6</span>):\n    <span class="kw">print</span>(<span class="fn">vuelta</span>(auto, i))'},
-   {title:'¡Felicidades Campeón!',th:'<b>Completaste los 8 circuitos.</b><br><br>Ahora sabes:<br><ul><li>Variables y tipos</li><li>Condicionales</li><li>Bucles for y while</li><li>Funciones</li><li>Listas y diccionarios</li><li>Manejo de errores</li></ul>',co:'<span class="cm"># Eres un programador Python</span>\ncampeon = {\n    <span class="st">"nombre"</span>: <span class="st">"Tú"</span>,\n    <span class="st">"nivel"</span>: <span class="st">"Maestro"</span>\n}\n<span class="kw">print</span>(<span class="st">"¡Eres increíble!"</span>)'}],
+  [{t:'Variables — cajones de datos',th:'<b>Una variable</b> guarda información con un nombre.<br><br><b>Tipos principales:</b><ul><li><b>int</b> — enteros: velocidad = 120</li><li><b>float</b> — decimales: 99.5</li><li><b>str</b> — texto: "Turbo Py"</li><li><b>bool</b> — True / False</li></ul>',co:'<span class="cm"># Tu auto</span>\nvelocidad = <span class="nm">120</span>\ncombustible = <span class="nm">99.5</span>\nnombre = <span class="st">"Turbo Python"</span>\nactivo = <span class="kw">True</span>\n<span class="kw">print</span>(nombre, velocidad)'},
+   {t:'Operaciones con variables',th:'<b>Matemáticas</b> con variables:<br><ul><li><code>+</code> suma &nbsp; <code>-</code> resta</li><li><code>*</code> multiplicar &nbsp; <code>/</code> dividir</li><li><code>**</code> potencia</li><li><code>+=</code> suma y asigna</li></ul>',co:'velocidad = <span class="nm">100</span>\nboost = <span class="nm">30</span>\nvel_final = velocidad + boost\n<span class="kw">print</span>(vel_final)  <span class="cm"># 130</span>\n\ncombustible = <span class="nm">100</span>\ncombustible -= <span class="nm">15</span>\n<span class="kw">print</span>(combustible)  <span class="cm"># 85</span>'}],
+  [{t:'Condicionales — if / else',th:'<b>Tu auto toma decisiones</b> según la pista.<br><ul><li><b>if</b> — si la condición es verdadera</li><li><b>else</b> — si no lo es</li></ul><b>Operadores:</b> &gt; &lt; == != &gt;= &lt;=',co:'combustible = <span class="nm">35</span>\n<span class="kw">if</span> combustible &gt; <span class="nm">50</span>:\n    maniobra = <span class="st">"boost"</span>\n<span class="kw">else</span>:\n    maniobra = <span class="st">"pit stop"</span>\n<span class="kw">print</span>(maniobra)'},
+   {t:'Condicionales — elif',th:'<b>elif</b> agrega más condiciones. Python las evalúa en orden y ejecuta la <b>primera verdadera</b>.',co:'velocidad = <span class="nm">145</span>\n<span class="kw">if</span> velocidad &gt; <span class="nm">160</span>:\n    aviso = <span class="st">"peligro"</span>\n<span class="kw">elif</span> velocidad &gt; <span class="nm">120</span>:\n    aviso = <span class="st">"precaucion"</span>\n<span class="kw">else</span>:\n    aviso = <span class="st">"lento"</span>\n<span class="kw">print</span>(aviso)'}],
+  [{t:'Bucle for — vueltas exactas',th:'<b>for</b> repite un número exacto de veces.<br><code>range(n)</code> genera 0 hasta n-1.',co:'<span class="kw">for</span> vuelta <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">5</span>):\n    combustible -= <span class="nm">10</span>\n    <span class="kw">print</span>(<span class="st">f"Vuelta {vuelta+1}: {combustible}L"</span>)'},
+   {t:'Bucle while — mientras sea verdad',th:'<b>while</b> repite <b>mientras</b> la condición sea True.<br><br>⚠️ Si nunca es False → bucle infinito.',co:'combustible = <span class="nm">100</span>\n<span class="kw">while</span> combustible &gt; <span class="nm">0</span>:\n    combustible -= <span class="nm">20</span>\n    <span class="kw">print</span>(<span class="st">f"Quedan {combustible}L"</span>)\n<span class="kw">print</span>(<span class="st">"Sin combustible"</span>)'}],
+  [{t:'Funciones — poderes del auto',th:'<b>Una función</b> es código reutilizable con nombre.<br><ul><li><code>def</code> — define la función</li><li>parámetros — datos de entrada</li><li><code>return</code> — devuelve el resultado</li></ul>',co:'<span class="kw">def</span> <span class="fn">turbo_boost</span>(vel, fuel):\n    <span class="kw">if</span> fuel &gt; <span class="nm">40</span>:\n        <span class="kw">return</span> vel + <span class="nm">30</span>\n    <span class="kw">return</span> vel\n\nresult = <span class="fn">turbo_boost</span>(<span class="nm">100</span>, <span class="nm">60</span>)\n<span class="kw">print</span>(result)'},
+   {t:'Funciones con múltiples parámetros',th:'Las funciones pueden recibir <b>varios parámetros</b> y devolver cualquier tipo.',co:'<span class="kw">def</span> <span class="fn">estado</span>(vel, fuel):\n    nivel = <span class="st">"ok"</span>\n    <span class="kw">if</span> fuel &lt; <span class="nm">20</span>:\n        nivel = <span class="st">"critico"</span>\n    <span class="kw">elif</span> vel &gt; <span class="nm">200</span>:\n        nivel = <span class="st">"peligro"</span>\n    <span class="kw">return</span> nivel\n<span class="kw">print</span>(<span class="fn">estado</span>(<span class="nm">150</span>,<span class="nm">10</span>))'}],
+  [{t:'Listas — tu garaje',th:'<b>Una lista</b> guarda múltiples valores en orden.<br><ul><li>Índices desde <b>0</b></li><li><code>.append(x)</code> añade al final</li><li><code>len(lista)</code> cuenta elementos</li></ul>',co:'garaje = [<span class="st">"Turbo"</span>, <span class="st">"Shadow"</span>]\ngaraje.<span class="fn">append</span>(<span class="st">"Rocket"</span>)\n<span class="kw">print</span>(garaje[<span class="nm">0</span>])  <span class="cm"># Turbo</span>\n<span class="kw">print</span>(<span class="fn">len</span>(garaje)) <span class="cm"># 3</span>'},
+   {t:'Recorrer listas con for',th:'Usa <b>for</b> para procesar cada elemento automáticamente.',co:'mejoras = [<span class="st">"turbo"</span>,<span class="st">"nitro"</span>,<span class="st">"blindaje"</span>]\n\n<span class="kw">for</span> mejora <span class="kw">in</span> mejoras:\n    <span class="kw">print</span>(<span class="st">f"Instalando: {mejora}"</span>)'}],
+  [{t:'Diccionarios — ficha del corredor',th:'<b>Diccionario</b> = pares clave:valor entre <code>{ }</code>.<br><ul><li>Accede por nombre: <code>d["clave"]</code></li><li>Asigna: <code>d["clave"] = x</code></li></ul>',co:'corredor = {\n  <span class="st">"nombre"</span>: <span class="st">"Piloto_42"</span>,\n  <span class="st">"victorias"</span>: <span class="nm">14</span>\n}\n<span class="kw">print</span>(corredor[<span class="st">"nombre"</span>])\ncorredor[<span class="st">"victorias"</span>] += <span class="nm">1</span>'},
+   {t:'Recorrer diccionarios',th:'<code>.items()</code> devuelve cada par clave-valor.',co:'stats = {<span class="st">"vel"</span>:<span class="nm">180</span>, <span class="st">"fuel"</span>:<span class="nm">75</span>}\n\n<span class="kw">for</span> k, v <span class="kw">in</span> stats.<span class="fn">items</span>():\n    <span class="kw">print</span>(<span class="st">f"{k}: {v}"</span>)'}],
+  [{t:'Try/Except — mecánico de errores',th:'<b>try/except</b> protege tu código.<br><ul><li><b>try</b> — intenta esto</li><li><b>except</b> — si falla, haz esto</li><li><b>finally</b> — siempre ejecuta</li></ul>',co:'<span class="kw">try</span>:\n    vel = <span class="fn">int</span>(<span class="st">"rapido"</span>)\n<span class="kw">except</span> ValueError:\n    vel = <span class="nm">0</span>\n    <span class="kw">print</span>(<span class="st">"Sensor dañado"</span>)\n<span class="kw">finally</span>:\n    <span class="kw">print</span>(<span class="st">"Revision OK"</span>)'},
+   {t:'Tipos de errores comunes',th:'<ul><li><b>ValueError</b> — dato incorrecto</li><li><b>ZeroDivisionError</b> — división por cero</li><li><b>IndexError</b> — índice fuera de rango</li><li><b>KeyError</b> — clave no existe</li></ul>',co:'<span class="kw">try</span>:\n    x = <span class="nm">100</span> / <span class="nm">0</span>\n<span class="kw">except</span> ZeroDivisionError:\n    <span class="kw">print</span>(<span class="st">"No dividas por cero"</span>)'}],
+  [{t:'Proyecto final — todo junto',th:'¡Usarás <b>TODOS los conceptos</b> juntos!<br><ul><li>Variables + f-strings</li><li>Funciones + parámetros</li><li>Bucles for</li><li>Listas y diccionarios</li><li>try/except</li></ul>',co:'auto = {<span class="st">"vel"</span>:<span class="nm">120</span>, <span class="st">"fuel"</span>:<span class="nm">100</span>}\n\n<span class="kw">def</span> <span class="fn">vuelta</span>(a, n):\n    a[<span class="st">"fuel"</span>] -= <span class="nm">15</span>\n    <span class="kw">if</span> a[<span class="st">"fuel"</span>] &lt; <span class="nm">20</span>:\n        <span class="kw">return</span> <span class="st">"PIT STOP"</span>\n    <span class="kw">return</span> <span class="st">f"Vuelta {n} OK"</span>\n\n<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="nm">1</span>,<span class="nm">6</span>):\n    <span class="kw">print</span>(<span class="fn">vuelta</span>(auto,i))'},
+   {t:'¡Felicidades Campeón!',th:'<b>Completaste los 8 circuitos.</b><br><br>Ahora dominas:<br><ul><li>Variables y tipos</li><li>Condicionales</li><li>Bucles for y while</li><li>Funciones</li><li>Listas y diccionarios</li><li>Manejo de errores</li></ul>',co:'<span class="cm"># Eres un programador Python</span>\ncampeon = {\n  <span class="st">"nombre"</span>: <span class="st">"Tú"</span>,\n  <span class="st">"nivel"</span>: <span class="st">"Maestro"</span>\n}\n<span class="kw">print</span>(<span class="st">"¡Lo lograste!"</span>)'}],
 ];
 const EX=[
-  [{title:'Variables',q:'¿Cómo guardas el número 150 en la variable velocidad?',ht:'El operador de asignación es = (un solo igual)',co:'velocidad ___ 150\nprint(velocidad)',opts:['= 150','== 150','int(150)','vel(150)'],c:0,ok:'¡Correcto! = asigna valores. Tu auto arranca. +50 XP 🏎️',err:'= asigna. == compara. Necesitas asignar aquí.'},
-   {title:'f-strings',q:'¿Cómo imprimes el valor de nombre dentro de un texto?',ht:'Los f-strings usan f"texto {variable}"',co:'nombre = "Turbo"\nprint(___)',opts:['f"Auto: {nombre}"','"Auto: nombre"','nombre + "Auto"','print(nombre)'],c:0,ok:'¡Genial! f-strings con {} insertan variables. +50 XP',err:'Necesitas f antes de las comillas y {} alrededor de la variable.'}],
-  [{title:'Condicionales',q:'Velocidad=130. ¿Qué condición activa el freno si supera 120?',ht:'> compara si el valor de la izquierda es mayor',co:'velocidad = 130\nif ___:\n    freno = "emergencia"',opts:['velocidad > 120','velocidad = 120','velocidad < 120','velocidad != 120'],c:0,ok:'¡Excelente! > significa mayor que. +60 XP',err:'> es mayor que. ¿Cuándo es peligrosa la velocidad?'},
-   {title:'elif',q:'¿Qué palabra agrega una segunda condición después del if?',ht:'Si if no es verdadero, prueba otra condición con...',co:'if combustible > 50:\n    modo = "boost"\n___ combustible > 20:\n    modo = "normal"',opts:['elif','else if','or if','also'],c:0,ok:'¡Correcto! elif evalúa otra condición. +60 XP',err:'En Python la segunda condición se escribe como elif.'}],
-  [{title:'Bucles for',q:'¿Qué número va en range() para hacer exactamente 5 vueltas?',ht:'range(n) da n repeticiones: 0,1,2... hasta n-1',co:'for vuelta in range(___):\n    print(f"Vuelta {vuelta+1}")',opts:['5','4','6','0'],c:0,ok:'¡Perfecto! range(5) da 5 iteraciones. +55 XP',err:'range(n) da exactamente n repeticiones. Para 5 vueltas: range(5).'},
-   {title:'while',q:'¿Qué condición pones para que el auto corra mientras tenga combustible?',ht:'El while corre mientras la condición sea True',co:'combustible = 100\nwhile ___:\n    combustible -= 10',opts:['combustible > 0','combustible = 0','combustible != True','True > 0'],c:0,ok:'¡Correcto! Mientras combustible > 0 el auto corre. +55 XP',err:'El while necesita una comparación. Mientras combustible sea mayor que 0...'}],
-  [{title:'Funciones',q:'¿Cómo se define una función llamada calcular_boost?',ht:'Las funciones se crean con la palabra clave def',co:'___ calcular_boost(vel):\n    return vel + 20',opts:['def','function','func','define'],c:0,ok:'¡Bien! def es la palabra clave en Python. +65 XP',err:'En Python todas las funciones empiezan con def.'},
-   {title:'return',q:'¿Qué palabra devuelve el resultado de una función?',ht:'Para que una función entregue un valor usa...',co:'def boost(velocidad):\n    nueva_vel = velocidad + 50\n    ___ nueva_vel',opts:['return','print','give','send'],c:0,ok:'¡Exacto! return devuelve el valor. +65 XP',err:'return es la palabra para devolver valores desde una función.'}],
-  [{title:'Listas append',q:'¿Cómo agregas "Rocket R1" al final de la lista garaje?',ht:'El método que añade al final de una lista se llama...',co:'garaje = ["Turbo","Shadow"]\ngaraje.___\nprint(garaje)',opts:['append("Rocket R1")','add("Rocket R1")','insert("Rocket")','push("Rocket R1")'],c:0,ok:'¡Correcto! .append() añade al final. +70 XP',err:'En Python el método para añadir al final es .append().'},
-   {title:'Índices',q:'¿Qué índice usas para acceder al PRIMER elemento de la lista?',ht:'Las listas en Python empiezan a contar desde 0',co:'autos = ["Turbo","Shadow","Rocket"]\nprimer = autos[___]\nprint(primer)',opts:['0','1','2','-1'],c:0,ok:'¡Perfecto! Los índices empiezan en 0. +70 XP',err:'¡Recuerda! En Python los índices empiezan en 0, no en 1.'}],
-  [{title:'Diccionarios',q:'¿Cómo obtienes el valor de la clave "victorias"?',ht:'Para acceder a un diccionario: d["clave"]',co:'corredor = {"nombre":"Py42","victorias":14}\nvict = corredor[___]\nprint(vict)',opts:['"victorias"','victorias','[victorias]','get victorias'],c:0,ok:'¡Excelente! Los diccionarios se acceden con la clave entre comillas. +75 XP',err:'Para acceder: d["clave"] — la clave va entre comillas.'},
-   {title:'Actualizar dict',q:'¿Cómo sumas 1 a las victorias del corredor?',ht:'Actualizar un valor usa el operador +=',co:'corredor = {"victorias": 14}\ncorredor["victorias"] ___\nprint(corredor)',opts:['+=  1','= + 1','++','= 15'],c:0,ok:'¡Correcto! += 1 suma 1 al valor actual. +75 XP',err:'+= 1 es el operador para sumar 1 al valor actual.'}],
-  [{title:'Try/Except',q:'¿Qué palabra captura el error cuando el try falla?',ht:'El try/except tiene dos bloques: try intenta, ___ captura',co:'try:\n    vel = int("texto")\n___ ValueError:\n    print("Error")',opts:['except','catch','error','handle'],c:0,ok:'¡Correcto! except captura el error. +80 XP',err:'En Python se usa except, no catch como en otros lenguajes.'},
-   {title:'ValueError',q:'¿Qué tipo de error ocurre al hacer int("rapido")?',ht:'ValueError ocurre cuando el valor no es del tipo esperado',co:'try:\n    numero = int("rapido")\nexcept ___:\n    print("No es numero")',opts:['ValueError','TypeError','NameError','IndexError'],c:0,ok:'¡Exacto! ValueError al convertir un valor incompatible. +80 XP',err:'ValueError ocurre cuando el dato no puede convertirse al tipo pedido.'}],
-  [{title:'Proyecto final',q:'¿Cómo llamas la función vuelta() con el diccionario auto y el número 1?',ht:'Las funciones se llaman: nombre(argumentos)',co:'def vuelta(auto, num):\n    return f"Vuelta {num}"\nauto = {"vel":120}\nresult = ___',opts:['vuelta(auto, 1)','vuelta auto 1','call vuelta(auto,1)','vuelta[auto][1]'],c:0,ok:'¡CAMPEÓN! Llamaste la función correctamente. +100 XP 🏆',err:'Para llamar: nombre(argumentos). Los parámetros van entre paréntesis.'},
-   {title:'Estructuras de datos',q:'¿Qué estructura usas para guardar nombre, nivel y victorias con sus nombres?',ht:'Necesitas guardar datos con claves, no con posiciones',co:'corredor = ___\nprint(corredor["nombre"])',opts:['{"nombre":"P42","nivel":5}','["nombre","nivel"]','("nombre","nivel")','nombre = nivel = 5'],c:0,ok:'¡GRAN CAMPEÓN! Dominas todo Python. +100 XP 🎉',err:'Un diccionario {clave:valor} es la estructura perfecta.'}],
+  [{t:'Variables',q:'¿Cómo guardas el número 150 en velocidad?',h:'El operador de asignación es = (un solo igual)',co:'velocidad ___ 150\nprint(velocidad)',op:['= 150','== 150','int(150)','vel(150)'],c:0,ok:'¡Correcto! = asigna. Tu auto arranca a 150 km/h. +50 XP 🏎️',er:'= asigna. == compara. Necesitas asignar aquí.'},
+   {t:'f-strings',q:'¿Cómo imprimes la variable nombre dentro de un texto?',h:'Los f-strings: f"texto {variable}"',co:'nombre = "Turbo"\nprint(___)',op:['f"Auto: {nombre}"','"Auto: nombre"','nombre + texto','print nombre'],c:0,ok:'¡Genial! f"..." con {} inserta variables. +50 XP',er:'Necesitas f antes de las comillas y {} alrededor de la variable.'}],
+  [{t:'Condicionales',q:'Velocidad=130. ¿Condición para frenar si supera 120?',h:'> compara si el valor de la izquierda es mayor',co:'velocidad = 130\nif ___:\n    freno = "emergencia"',op:['velocidad > 120','velocidad = 120','velocidad < 120','120 > velocidad'],c:0,ok:'¡Excelente! > significa mayor que. +60 XP',er:'> es mayor que. ¿Cuándo es peligrosa la velocidad?'},
+   {t:'elif',q:'¿Qué palabra agrega una segunda condición después del if?',h:'Si if no es verdadero, prueba otra condición...',co:'if combustible > 50:\n    modo = "boost"\n___ combustible > 20:\n    modo = "normal"',op:['elif','else if','or if','also'],c:0,ok:'¡Correcto! elif evalúa otra condición. +60 XP',er:'En Python la segunda condición es elif.'}],
+  [{t:'Bucles for',q:'¿Qué número va en range() para hacer 5 vueltas?',h:'range(n) da n repeticiones: 0,1,2... hasta n-1',co:'for vuelta in range(___):\n    print(f"Vuelta {vuelta+1}")',op:['5','4','6','0'],c:0,ok:'¡Perfecto! range(5) = 5 iteraciones. +55 XP',er:'range(n) da exactamente n repeticiones.'},
+   {t:'while',q:'¿Condición para que el auto corra mientras haya combustible?',h:'El while corre mientras la condición sea True',co:'combustible = 100\nwhile ___:\n    combustible -= 10',op:['combustible > 0','combustible = 0','True > 0','combustible'],c:0,ok:'¡Correcto! Mientras combustible > 0. +55 XP',er:'El while necesita: mientras combustible sea mayor que 0...'}],
+  [{t:'Funciones',q:'¿Cómo se define una función llamada calcular_boost?',h:'Las funciones se crean con la palabra clave def',co:'___ calcular_boost(vel):\n    return vel + 20',op:['def','function','func','define'],c:0,ok:'¡Bien! def define funciones en Python. +65 XP',er:'En Python todas las funciones empiezan con def.'},
+   {t:'return',q:'¿Qué palabra devuelve el resultado de una función?',h:'Para que una función entregue un valor...',co:'def boost(velocidad):\n    nueva = velocidad + 50\n    ___ nueva',op:['return','print','give','send'],c:0,ok:'¡Exacto! return devuelve el valor. +65 XP',er:'return es la palabra para devolver valores.'}],
+  [{t:'Listas append',q:'¿Cómo agregas "Rocket" al final de la lista garaje?',h:'El método que añade al final se llama...',co:'garaje = ["Turbo","Shadow"]\ngaraje.___\nprint(garaje)',op:['append("Rocket")','add("Rocket")','insert("Rocket")','push("Rocket")'],c:0,ok:'¡Correcto! .append() añade al final. +70 XP',er:'En Python el método para añadir al final es .append().'},
+   {t:'Índices',q:'¿Qué índice usas para el PRIMER elemento de la lista?',h:'Las listas en Python empiezan en 0',co:'autos = ["Turbo","Shadow","Rocket"]\nprimer = autos[___]',op:['0','1','2','-1'],c:0,ok:'¡Perfecto! Los índices empiezan en 0. +70 XP',er:'En Python los índices empiezan en 0, no en 1.'}],
+  [{t:'Diccionarios',q:'¿Cómo obtienes el valor de la clave "victorias"?',h:'Para acceder a un diccionario: d["clave"]',co:'corredor = {"nombre":"Py","victorias":14}\nvict = corredor[___]',op:['"victorias"','victorias','[victorias]','get victorias'],c:0,ok:'¡Excelente! Clave entre comillas. +75 XP',er:'Para acceder: d["clave"] — la clave va en comillas.'},
+   {t:'Actualizar dict',q:'¿Cómo sumas 1 a las victorias del corredor?',h:'Actualizar usa el operador +=',co:'corredor = {"victorias": 14}\ncorredor["victorias"] ___\nprint(corredor)',op:['+=  1','= + 1','++','= 15'],c:0,ok:'¡Correcto! += 1 suma 1 al valor actual. +75 XP',er:'+= 1 es el operador para sumar 1 al valor actual.'}],
+  [{t:'Try/Except',q:'¿Qué palabra captura el error cuando el try falla?',h:'El try/except: try intenta, ___ captura',co:'try:\n    vel = int("texto")\n___ ValueError:\n    print("Error")',op:['except','catch','error','handle'],c:0,ok:'¡Correcto! except captura errores. +80 XP',er:'En Python se usa except (no catch).'},
+   {t:'ValueError',q:'¿Qué error ocurre al hacer int("rapido")?',h:'ValueError ocurre cuando el valor no es del tipo esperado',co:'try:\n    n = int("rapido")\nexcept ___:\n    print("No es numero")',op:['ValueError','TypeError','NameError','IndexError'],c:0,ok:'¡Exacto! ValueError al convertir un valor incompatible. +80 XP',er:'ValueError ocurre al convertir datos incompatibles.'}],
+  [{t:'Proyecto final',q:'¿Cómo llamas la función vuelta() con auto y el número 1?',h:'Funciones se llaman: nombre(argumentos)',co:'def vuelta(auto,num):\n    return f"Vuelta {num}"\nauto = {"vel":120}\nresult = ___',op:['vuelta(auto, 1)','vuelta auto 1','call vuelta(auto)','vuelta[auto][1]'],c:0,ok:'¡CAMPEÓN! Llamada correcta. +100 XP 🏆',er:'Para llamar: nombre(argumentos) entre paréntesis.'},
+   {t:'Estructuras',q:'¿Qué estructura guarda nombre, nivel y victorias con sus nombres?',h:'Necesitas guardar datos con claves, no posiciones',co:'corredor = ___\nprint(corredor["nombre"])',op:['{"nombre":"P42","nivel":5}','["nombre","nivel"]','("nombre","nivel")','nombre = nivel'],c:0,ok:'¡GRAN CAMPEÓN! Dominas todo Python. +100 XP 🎉',er:'Un diccionario {clave:valor} es la estructura perfecta.'}],
 ];
 const EMIS=[
-  {id:0,title:'Configura tu auto',desc:'Declara nombre, velocidad, combustible. Imprime con f-strings.',hint:'nombre = "Turbo Py" / velocidad = 120 / combustible = 100 / print(f"Auto: {nombre}")',starter:'# Declara las variables de tu auto\nnombre = ""\nvelocidad = \ncombustible = \n\nprint(f"Auto: {nombre}")\nprint(f"Velocidad: {velocidad} km/h")\nprint(f"Combustible: {combustible} litros")',xp:60},
-  {id:1,title:'Decisión en curva',desc:'if/elif/else: >150="freno", >100="curva", else="acelerar"',hint:'if velocidad > 150: print("freno") / elif velocidad > 100: print("curva") / else: print("acelerar")',starter:'velocidad = 130\n\nif velocidad > :\n    print("")\nelif velocidad > :\n    print("")\nelse:\n    print("")',xp:70},
-  {id:2,title:'5 vueltas al circuito',desc:'for + range(5). Cada vuelta imprime número y combustible. Empieza en 100L, baja 15 por vuelta.',hint:'for vuelta in range(5): / combustible -= 15 / print(f"Vuelta {vuelta+1}: {combustible}L")',starter:'combustible = 100\n\nfor vuelta in range():\n    combustible -= \n    print(f"Vuelta ")',xp:75},
-  {id:3,title:'Función de boost',desc:'Crea turbo(vel,fuel): retorna vel+40 si fuel>50, si no retorna vel.',hint:'def turbo(vel, fuel): / if fuel > 50: return vel + 40 / return vel',starter:'def turbo(velocidad, combustible):\n    # Tu logica aqui\n    \n\nprint(turbo(120, 80))  # debe dar 160\nprint(turbo(120, 30))  # debe dar 120',xp:80},
-  {id:4,title:'Gestión del garaje',desc:'Lista con 2 autos, agrega con append(), imprime con for, muestra total con len().',hint:'garaje = ["Auto1","Auto2"] / garaje.append("Auto3") / for auto in garaje: print(auto)',starter:'garaje = []\n\ngaraje.append("")\ngaraje.append("")\ngaraje.append("")\n\nfor auto in garaje:\n    print(f"Auto: {auto}")\n\nprint(f"Total: {len(garaje)} autos")',xp:80},
-  {id:5,title:'Ficha del corredor',desc:'Diccionario con nombre, victorias, nivel. Suma +1 victoria. Imprime con .items().',hint:'corredor = {"nombre":"...", "victorias":0} / corredor["victorias"] += 1',starter:'corredor = {\n    "nombre": "",\n    "victorias": ,\n    "nivel": \n}\n\ncorredor["victorias"] +=\n\nfor stat, valor in corredor.items():\n    print(f"{stat}: {valor}")',xp:85},
-  {id:6,title:'Mecánico de errores',desc:'try/except para proteger int("turbo"). Captura ValueError.',hint:'try: velocidad = int("turbo") / except ValueError: velocidad = 0',starter:'sensor_dato = "turbo"\n\ntry:\n    velocidad = int(sensor_dato)\nexcept ValueError:\n    velocidad = \n    print("")\n\nprint(f"Velocidad final: {velocidad}")',xp:90},
-  {id:7,title:'Sistema de carrera completo',desc:'Proyecto final: diccionario auto + función vuelta() + bucle for de 5 vueltas.',hint:'auto = {"fuel":100} / def vuelta(a,n): a["fuel"]-=15 / for i in range(1,6): print(vuelta(auto,i))',starter:'auto = {"nombre": "", "vel": 120, "fuel": 100}\n\ndef vuelta(auto, num):\n    auto["fuel"] -= \n    if auto["fuel"] < :\n        return f"Vuelta {num}: PIT STOP"\n    return f"Vuelta {num}: OK - {auto[\'fuel\']}L"\n\nfor i in range(1, ):\n    resultado = vuelta(auto, i)\n    print(resultado)',xp:120},
+  {id:0,t:'Configura tu auto',d:'Declara nombre, velocidad, combustible. Imprime con f-strings.',h:'nombre = "Turbo Py" / velocidad = 120 / combustible = 100 / print(f"Auto: {nombre}")',s:'# Declara las variables\nnombre = ""\nvelocidad = \ncombustible = \n\nprint(f"Auto: {nombre}")\nprint(f"Velocidad: {velocidad} km/h")\nprint(f"Combustible: {combustible} litros")',xp:60},
+  {id:1,t:'Decisión en curva',d:'if/elif/else: >150="freno", >100="curva", else="acelerar"',h:'if velocidad > 150: print("freno") / elif > 100: print("curva") / else: print("acelerar")',s:'velocidad = 130\n\nif velocidad > :\n    print("")\nelif velocidad > :\n    print("")\nelse:\n    print("")',xp:70},
+  {id:2,t:'5 vueltas al circuito',d:'for + range(5). Imprime número y combustible. Empieza 100L, baja 15 por vuelta.',h:'for vuelta in range(5): / combustible -= 15 / print(f"Vuelta {vuelta+1}: {combustible}L")',s:'combustible = 100\n\nfor vuelta in range():\n    combustible -= \n    print(f"Vuelta ")',xp:75},
+  {id:3,t:'Función de boost',d:'Crea turbo(vel,fuel): retorna vel+40 si fuel>50, si no retorna vel.',h:'def turbo(vel, fuel): / if fuel > 50: return vel + 40 / return vel',s:'def turbo(velocidad, combustible):\n    # Tu logica\n    \n\nprint(turbo(120, 80))  # 160\nprint(turbo(120, 30))  # 120',xp:80},
+  {id:4,t:'Gestión del garaje',d:'Lista con 2 autos, append(), for para imprimir, len() para total.',h:'garaje = [] / garaje.append("Auto1") / for auto in garaje: print(auto)',s:'garaje = []\n\ngaraje.append("")\ngaraje.append("")\ngaraje.append("")\n\nfor auto in garaje:\n    print(f"Auto: {auto}")\n\nprint(f"Total: {len(garaje)} autos")',xp:80},
+  {id:5,t:'Ficha del corredor',d:'Diccionario nombre/victorias/nivel. Suma +1 victoria. Imprime con .items().',h:'corredor = {"nombre":"..."} / corredor["victorias"] += 1 / for k,v in corredor.items(): print(k,v)',s:'corredor = {\n    "nombre": "",\n    "victorias": ,\n    "nivel": \n}\n\ncorredor["victorias"] +=\n\nfor stat, valor in corredor.items():\n    print(f"{stat}: {valor}")',xp:85},
+  {id:6,t:'Mecánico de errores',d:'try/except para proteger int("turbo"). Captura ValueError.',h:'try: velocidad = int("turbo") / except ValueError: velocidad = 0',s:'sensor = "turbo"\n\ntry:\n    velocidad = int(sensor)\nexcept ValueError:\n    velocidad = \n    print("")\n\nprint(f"Velocidad: {velocidad}")',xp:90},
+  {id:7,t:'Sistema de carrera completo',d:'Proyecto final: dict auto + función vuelta() + for de 5 vueltas.',h:'auto = {"fuel":100} / def vuelta(a,n): a["fuel"]-=15 / for i in range(1,6): print(vuelta(auto,i))',s:'auto = {"nombre":"", "vel":120, "fuel":100}\n\ndef vuelta(auto, num):\n    auto["fuel"] -= \n    if auto["fuel"] < :\n        return f"Vuelta {num}: PIT STOP"\n    return f"Vuelta {num}: OK - {auto[\'fuel\']}L"\n\nfor i in range(1, ):\n    print(vuelta(auto, i))',xp:120},
 ];
 const BOTS=[
-  {name:'Ana P.',xp:3420,lvl:8,wins:28,streak:'12d'},
-  {name:'Carlos M.',xp:2980,lvl:7,wins:22,streak:'7d'},
-  {name:'Sofía R.',xp:2640,lvl:6,wins:18,streak:'5d'},
-  {name:'Luis T.',xp:2100,lvl:5,wins:15,streak:'3d'},
-  {name:'Pedro V.',xp:980,lvl:3,wins:7,streak:'2d'},
-  {name:'María C.',xp:750,lvl:2,wins:5,streak:'1d'},
+  {nm:'Ana P.',xp:3420,lv:8,wi:28,st:'12d'},{nm:'Carlos M.',xp:2980,lv:7,wi:22,st:'7d'},
+  {nm:'Sofía R.',xp:2640,lv:6,wi:18,st:'5d'},{nm:'Luis T.',xp:2100,lv:5,wi:15,st:'3d'},
+  {nm:'Pedro V.',xp:980,lv:3,wi:7,st:'2d'},{nm:'María C.',xp:750,lv:2,wi:5,st:'1d'},
 ];
-const TROPHIES=[
-  {id:'win1',icon:'🏁',name:'Primera victoria',desc:'Completa tu primera carrera'},
-  {id:'ex1',icon:'⚡',name:'Velocista',desc:'Responde un ejercicio correcto'},
-  {id:'c0',icon:'📦',name:'Maestro de Variables',desc:'Completa Circuito 1'},
-  {id:'c1',icon:'🔀',name:'Decisiones',desc:'Completa Circuito 2'},
-  {id:'c2',icon:'🔄',name:'Rey de Bucles',desc:'Completa Circuito 3'},
-  {id:'c3',icon:'⚙️',name:'Ingeniero',desc:'Completa Circuito 4'},
-  {id:'c4',icon:'📋',name:'Dueño del Garaje',desc:'Completa Circuito 5'},
-  {id:'c5',icon:'📊',name:'Estadístico',desc:'Completa Circuito 6'},
-  {id:'c6',icon:'🔧',name:'Mecánico',desc:'Completa Circuito 7'},
-  {id:'c7',icon:'🏆',name:'Gran Campeón',desc:'Completa todos los circuitos'},
-  {id:'ed5',icon:'💻',name:'Programador Real',desc:'Completa 5 misiones editor'},
-  {id:'s7',icon:'🔥',name:'Racha Legendaria',desc:'Racha de 7 días'},
+const TROPH=[
+  {id:'w1',ic:'🏁',nm:'Primera victoria',ds:'Completa tu primera carrera'},
+  {id:'e1',ic:'⚡',nm:'Velocista',ds:'Responde un ejercicio correcto'},
+  {id:'c0',ic:'📦',nm:'Maestro Variables',ds:'Completa Circuito 1'},
+  {id:'c1',ic:'🔀',nm:'Decisiones',ds:'Completa Circuito 2'},
+  {id:'c2',ic:'🔄',nm:'Rey Bucles',ds:'Completa Circuito 3'},
+  {id:'c3',ic:'⚙️',nm:'Ingeniero',ds:'Completa Circuito 4'},
+  {id:'c4',ic:'📋',nm:'Dueño Garaje',ds:'Completa Circuito 5'},
+  {id:'c5',ic:'📊',nm:'Estadístico',ds:'Completa Circuito 6'},
+  {id:'c6',ic:'🔧',nm:'Mecánico',ds:'Completa Circuito 7'},
+  {id:'c7',ic:'🏆',nm:'Gran Campeón',ds:'Completa todos los circuitos'},
+  {id:'ed5',ic:'💻',nm:'Programador Real',ds:'Completa 5 misiones editor'},
+  {id:'s7',ic:'🔥',nm:'Racha Legendaria',ds:'Racha de 7 días'},
 ];
-
-// ===================== STATE =====================
-const SK='cr_save';
-let S={xp:0,coins:0,level:1,streak:0,lastDay:'',selCar:0,selCirc:0,
+ 
+// ═══════════════ STATE ═══════════════
+const SK='cr2';
+let S={xp:0,coins:0,lv:1,streak:0,lastDay:'',sc:0,sci:0,
        cars:[true,false,false,false,false,false],
        circs:[false,false,false,false,false,false,false,false],
-       edDone:[false,false,false,false,false,false,false,false],
-       trophies:[],wins:0,exOk:0,
-       daily:{ex:0,open:0,race:0,day:''}};
-function save(){try{localStorage.setItem(SK,JSON.stringify(S));}catch(e){}}
-function load(){
+       ed:[false,false,false,false,false,false,false,false],
+       tr:[],wins:0,exok:0,
+       daily:{ex:0,op:0,rc:0,day:''}};
+function sv(){try{localStorage.setItem(SK,JSON.stringify(S));}catch(e){}}
+function ld(){
   try{const d=localStorage.getItem(SK);if(d)S=Object.assign(S,JSON.parse(d));}catch(e){}
-  const today=new Date().toDateString();
-  if(S.lastDay!==today){
-    if(S.lastDay){const diff=Math.round((new Date(today)-new Date(S.lastDay))/86400000);S.streak=diff===1?S.streak+1:1;}
-    else S.streak=1;
-    S.lastDay=today;
+  const td=new Date().toDateString();
+  if(S.lastDay!==td){
+    S.streak=S.lastDay?Math.round((new Date(td)-new Date(S.lastDay))/86400000)===1?S.streak+1:1:1;
+    S.lastDay=td;
   }
-  if(S.daily.day!==today) S.daily={ex:0,open:1,race:0,day:today};
-  else S.daily.open=1;
-  save();updHUD();
+  if(S.daily.day!==td)S.daily={ex:0,op:1,rc:0,day:td};
+  else S.daily.op=1;
+  sv();updH();
 }
-function updHUD(){
+function updH(){
   document.getElementById('hxp').textContent=S.xp.toLocaleString();
-  document.getElementById('hco').textContent='🪙 '+S.coins;
-  document.getElementById('hlv').textContent='Nv '+S.level;
-  document.getElementById('hst').textContent='🔥 '+S.streak+'d';
+  document.getElementById('hco').textContent='🪙'+S.coins;
+  document.getElementById('hlv').textContent='Nv '+S.lv;
+  document.getElementById('hst').textContent='🔥'+S.streak+'d';
 }
 function addXP(n,silent){
-  S.xp+=n; S.coins+=Math.max(0,Math.floor(n/5));
-  const nl=Math.floor(S.xp/400)+1;
-  const lv=nl>S.level;S.level=nl;
-  CARS.forEach((c,i)=>{if(!S.cars[i]&&S.xp>=c.xpR)S.cars[i]=true;});
-  updHUD();save();
-  if(lv&&!silent)modal('⬆️','¡Subiste de nivel!','Ahora eres Nivel '+S.level+'.');
-  checkTrophies();
+  S.xp+=n;S.coins+=Math.max(0,Math.floor(n/5));
+  const nl=Math.floor(S.xp/400)+1,lv=nl>S.lv;S.lv=nl;
+  CARS.forEach((c,i)=>{if(!S.cars[i]&&S.xp>=c.xr)S.cars[i]=true;});
+  updH();sv();if(lv&&!silent)mod('⬆️','¡Subiste de nivel!','Ahora eres Nivel '+S.lv+'.');
+  chkTr();
 }
-
-// ===================== SCREENS =====================
-function go(name){
-  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none';});
-  const el=document.getElementById('screen-'+name);
+ 
+// ═══════════════ NAVEGAÇÃO ═══════════════
+function go(nm){
+  document.querySelectorAll('.scr').forEach(s=>{s.classList.remove('on');s.style.display='none';});
+  const el=document.getElementById('scr-'+nm);
   if(!el)return;
-  if(name==='race'){el.style.display='flex';el.classList.add('active');}
-  else{el.style.display='block';el.classList.add('active');}
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const idx={garage:0,race:1,editor:2,ranking:3,trophy:4}[name];
-  if(idx!=null)document.querySelectorAll('.nav-btn')[idx].classList.add('active');
-  if(name==='garage')buildGarage();
-  if(name==='editor'){buildMis();loadMis(curMis);}
-  if(name==='ranking')buildRanking();
-  if(name==='trophy')buildTrophies();
+  if(nm==='race'){el.style.display='flex';el.classList.add('on');}
+  else{el.style.display='block';el.classList.add('on');}
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  ['garage','race','editor','ranking','trophy'].forEach((n,i)=>{if(n===nm)document.querySelectorAll('.nb')[i].classList.add('on');});
+  if(nm==='garage')bldGar();
+  if(nm==='editor'){bldMis();ldMis(curM);}
+  if(nm==='ranking')bldRnk();
+  if(nm==='trophy')bldTr();
 }
-
-// ===================== GARAGE =====================
-function buildGarage(){
+ 
+// ═══════════════ GARAJE ═══════════════
+function bldGar(){
   const g=document.getElementById('car-grid');g.innerHTML='';
   CARS.forEach((car,i)=>{
     const un=S.cars[i];
     const d=document.createElement('div');
-    d.className='car-card'+(i===S.selCar?' sel':'')+(un?'':' locked');
-    const cv=document.createElement('canvas');cv.width=110;cv.height=50;cv.className='car-canvas';
+    d.className='cc'+(i===S.sc?' sel':'')+(un?'':' lk');
+    const cv=document.createElement('canvas');cv.width=100;cv.height=44;
     d.appendChild(cv);
-    d.innerHTML+=`<div class="car-nm">${car.name}</div><div class="car-sub">${car.desc}</div>`;
-    d.innerHTML+=`<div style="font-size:9px;color:var(--text3);margin-top:2px">Vel</div><div class="mbar"><div class="mfill" style="width:${car.spd*10}%;background:var(--blue)"></div></div>`;
-    d.innerHTML+=`<div style="font-size:9px;color:var(--text3)">Acel</div><div class="mbar"><div class="mfill" style="width:${car.ac*10}%;background:var(--green)"></div></div>`;
-    if(!un)d.innerHTML+=`<span class="lock-t">🔒 ${car.xpR.toLocaleString()} XP</span>`;
-    if(un)d.onclick=()=>{S.selCar=i;save();buildGarage();};
-    g.appendChild(d);drawCarCV(cv,car,un);
+    d.innerHTML+=`<div class="cnm">${car.nm}</div><div class="cs">${car.ds}</div>`;
+    d.innerHTML+=`<div style="font-size:9px;color:var(--text3)">Vel</div><div class="mb"><div class="mf" style="width:${car.spd*10}%;background:var(--blue)"></div></div>`;
+    d.innerHTML+=`<div style="font-size:9px;color:var(--text3)">Ac</div><div class="mb"><div class="mf" style="width:${car.ac*10}%;background:var(--green)"></div></div>`;
+    if(!un)d.innerHTML+=`<span class="lt">🔒${car.xr.toLocaleString()} XP</span>`;
+    if(un)d.onclick=()=>{S.sc=i;sv();bldGar();};
+    g.appendChild(d);drwCV(cv,car,un);
   });
   const cg=document.getElementById('circ-grid');cg.innerHTML='';
   CIRCS.forEach((c,i)=>{
     const done=S.circs[i];
     const d=document.createElement('div');
-    d.className='circ-card'+(done?' done':'');
-    d.innerHTML=`<div class="circ-num">Circuito 0${i+1}</div><div class="circ-nm" style="color:${c.color}">${c.name}</div><div class="circ-co">${c.concept}</div><span class="cbadge ${done?'cb-done':'cb-todo'}">${done?'✓ Completado':'Disponible'}</span>`;
-    d.onclick=()=>{S.selCirc=i;save();buildGarage();go('race');startRace();};
+    d.className='kc'+(done?' done':'');
+    d.innerHTML=`<div class="knum">Circuito 0${i+1}</div><div class="knm" style="color:${c.cl}">${c.nm}</div><div class="kco">${c.co}</div><span class="kbd ${done?'bd-ok':'bd-no'}">${done?'✓ Completado':'Disponible'}</span>`;
+    d.onclick=()=>{S.sci=i;sv();bldGar();go('race');startRace();};
     cg.appendChild(d);
   });
 }
-function drawCarCV(cv,car,un){
-  const ctx=cv.getContext('2d'),W=110,H=50,cx=W/2,cy=H/2;
+function drwCV(cv,car,un){
+  const ctx=cv.getContext('2d'),W=100,H=44,cx=W/2,cy=H/2;
   ctx.clearRect(0,0,W,H);
-  ctx.fillStyle=car.color;ctx.beginPath();ctx.roundRect(cx-24,cy-9,48,18,5);ctx.fill();
-  ctx.fillStyle=car.acc;ctx.beginPath();ctx.roundRect(cx-14,cy-15,28,12,3);ctx.fill();
+  ctx.fillStyle=car.col;ctx.beginPath();ctx.roundRect(cx-22,cy-8,44,16,5);ctx.fill();
+  ctx.fillStyle=car.acc;ctx.beginPath();ctx.roundRect(cx-13,cy-13,26,11,3);ctx.fill();
   ctx.fillStyle='#1a1a2a';
-  [[-14,10],[12,10]].forEach(([wx,wy])=>{ctx.beginPath();ctx.ellipse(cx+wx,cy+wy,6,4,0,0,Math.PI*2);ctx.fill();});
-  if(!un){ctx.fillStyle='rgba(0,0,0,.6)';ctx.fillRect(0,0,W,H);ctx.font='16px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🔒',cx,cy);}
+  [[-13,9],[11,9]].forEach(([wx,wy])=>{ctx.beginPath();ctx.ellipse(cx+wx,cy+wy,5,3.5,0,0,Math.PI*2);ctx.fill();});
+  if(!un){ctx.fillStyle='rgba(0,0,0,.6)';ctx.fillRect(0,0,W,H);ctx.font='14px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('🔒',cx,cy);}
 }
-
-// ===================== RACE ENGINE =====================
-// Track is a closed loop of bezier control points
-// We use a polyline and interpolate t in [0,1)
-const TW=680, TH=380;
-// Track path (closed loop, normalized for 680x380 canvas)
+ 
+// ═══════════════ CANVAS RACE ═══════════════
+// Pista pequeña — cabe en 220px de alto, todo visible
+const CW=680, CH=210;
+ 
+// Track points ajustados para CH=210
 const TP=[
-  {x:80,y:320},{x:180,y:320},{x:280,y:320},{x:380,y:320},{x:480,y:320},
-  {x:570,y:320},{x:620,y:280},{x:630,y:230},{x:615,y:180},
-  {x:570,y:150},{x:500,y:140},{x:430,y:140},{x:380,y:110},
-  {x:370,y:70},{x:340,y:40},{x:290,y:30},{x:240,y:30},
-  {x:190,y:40},{x:160,y:70},{x:150,y:110},
-  {x:140,y:140},{x:90,y:150},{x:50,y:180},
-  {x:40,y:230},{x:50,y:280},{x:80,y:320}
+  {x:70,y:175},{x:160,y:175},{x:250,y:175},{x:340,y:175},{x:430,y:175},
+  {x:510,y:175},{x:560,y:155},{x:590,y:125},{x:590,y:90},
+  {x:565,y:62},{x:520,y:48},{x:460,y:44},{x:400,y:44},
+  {x:340,y:44},{x:280,y:44},{x:220,y:44},
+  {x:160,y:48},{x:115,y:62},{x:88,y:90},
+  {x:82,y:125},{x:88,y:155},{x:70,y:175}
 ];
-const TLEN=TP.length;
-
+ 
 function tPos(t){
-  // t in [0,1), maps to track
   const raw=((t%1)+1)%1;
-  const fi=raw*(TLEN-1);
-  const i=Math.floor(fi)%(TLEN-1);
+  const fi=raw*(TP.length-1);
+  const i=Math.floor(fi)%(TP.length-1);
   const f=fi-Math.floor(fi);
-  const a=TP[i], b=TP[(i+1)%(TLEN)];
-  return{x:a.x+(b.x-a.x)*f, y:a.y+(b.y-a.y)*f};
+  const a=TP[i],b=TP[i+1]||TP[0];
+  return{x:a.x+(b.x-a.x)*f,y:a.y+(b.y-a.y)*f};
 }
-
-// Angle between consecutive points
-function tAngle(t){
-  const p1=tPos(t);
-  const p2=tPos(t+0.005);
-  return Math.atan2(p2.y-p1.y, p2.x-p1.x);
+function tAng(t){
+  const p1=tPos(t),p2=tPos(t+0.004);
+  return Math.atan2(p2.y-p1.y,p2.x-p1.x);
 }
-
-let rCv=null,rCtx=null;
-let rafId=null;
-let rActive=false;
-// player t and two bots
-let pT=0, b1T=0.18, b2T=0.34;
-let pSpeed=0;
-let triggered=new Set();
-let curCPs=[];
-let selOpt_=null, curExId_=0;
-
-function buildCPs(ci){
-  return [
-    {t:0.14, label:'Cartel 1', type:'bb', id:0, color:'#79b8ff'},
-    {t:0.32, label:'Ejercicio 1', type:'ex', id:0, color:'#f4a261'},
-    {t:0.52, label:'Cartel 2', type:'bb', id:1, color:'#85e89d'},
-    {t:0.70, label:'Ejercicio 2', type:'ex', id:1, color:'#f4a261'},
-    {t:0.88, label:'Bonus XP', type:'bonus', id:0, color:'#ffd166'},
+ 
+let cv,ctx2;
+let raf=null,rActive=false;
+let pT=0,b1T=0.18,b2T=0.34,pSpd=0;
+let trig=new Set(),cps=[];
+let selO=null,curExId=0;
+let lastTs=0;
+ 
+function buildCPs(){
+  return[
+    {t:.10,lbl:'Cartel 1',type:'bb',id:0,col:'#79b8ff'},
+    {t:.30,lbl:'Ejercicio 1',type:'ex',id:0,col:'#f4a261'},
+    {t:.52,lbl:'Cartel 2',type:'bb',id:1,col:'#85e89d'},
+    {t:.72,lbl:'Ejercicio 2',type:'ex',id:1,col:'#f4a261'},
+    {t:.88,lbl:'Bonus +30XP',type:'bonus',id:0,col:'#ffd166'},
   ];
 }
-
-function initRaceCanvas(){
-  rCv=document.getElementById('rc');
-  rCv.width=TW; rCv.height=TH;
-  rCv.style.width='100%'; rCv.style.height='auto';
-  rCtx=rCv.getContext('2d');
-  // click on checkpoints
-  rCv.onclick=function(e){
-    const rect=rCv.getBoundingClientRect();
-    const sx=TW/rect.width, sy=TH/rect.height;
-    const mx=(e.clientX-rect.left)*sx, my=(e.clientY-rect.top)*sy;
-    curCPs.forEach(cp=>{
+ 
+function initCV(){
+  cv=document.getElementById('rc');
+  cv.width=CW;cv.height=CH;
+  cv.style.width='100%';cv.style.height=CH+'px';
+  document.getElementById('track-area').style.height=CH+'px';
+  ctx2=cv.getContext('2d');
+  cv.onclick=function(e){
+    const r=cv.getBoundingClientRect(),sx=CW/r.width,sy=CH/r.height;
+    const mx=(e.clientX-r.left)*sx,my=(e.clientY-r.top)*sy;
+    cps.forEach(cp=>{
       const p=tPos(cp.t);
-      if(Math.hypot(mx-p.x,my-p.y)<22){
-        if(cp.type==='bb') openBB(cp.id);
-        else if(cp.type==='ex') openEx(cp.id);
+      if(Math.hypot(mx-p.x,my-p.y)<18){
+        if(cp.type==='bb')openBB(cp.id);
+        else if(cp.type==='ex')openEx(cp.id);
       }
     });
   };
 }
-
+ 
+function hideOverlay(){document.getElementById('start-overlay').style.display='none';}
+ 
 function startRace(){
-  if(!rCv) initRaceCanvas();
+  if(!cv)initCV();
   stopRace();
-  const car=CARS[S.selCar];
-  const circ=CIRCS[S.selCirc];
-  curCPs=buildCPs(S.selCirc);
-  pT=0; b1T=0.18; b2T=0.34;
-  pSpeed=0.0020+car.spd*0.00015;
-  triggered=new Set();
-  rActive=true;
-  selOpt_=null;
-  closeAllOv();
-  document.getElementById('rh-ci').textContent=circ.name;
-  document.getElementById('rh-lp').textContent='1/3';
-  document.getElementById('rh-st').textContent='En carrera';
-  document.getElementById('rh-st').style.color='var(--green)';
-  document.getElementById('pg-nx').textContent='Siguiente: Cartel 1';
-  tick();
+  const car=CARS[S.sc];
+  cps=buildCPs();
+  pT=0;b1T=0.17;b2T=0.35;
+  pSpd=0.0022+car.spd*0.00016;
+  trig=new Set();rActive=true;selO=null;
+  closeOvs();
+  document.getElementById('rci').textContent=CIRCS[S.sci].nm;
+  document.getElementById('rlp').textContent='1/3';
+  document.getElementById('rst').textContent='En carrera';
+  document.getElementById('rst').style.color='var(--green)';
+  document.getElementById('pgnx').textContent='Siguiente: Cartel 1';
+  document.getElementById('start-overlay').style.display='none';
+  lastTs=0;
+  raf=requestAnimationFrame(tick);
 }
-
-function stopRace(){
-  rActive=false;
-  if(rafId){cancelAnimationFrame(rafId);rafId=null;}
-}
-
-let lastTime=0;
-function tick(ts=0){
-  if(!rActive){render();return;}
-  const dt=Math.min(ts-lastTime,50);lastTime=ts;
-
-  // move cars
-  const car=CARS[S.selCar];
-  const ps=pSpeed*(dt/16.67);
-  pT=(pT+ps)%1;
-
-  // bots slightly slower/faster
-  b1T=(b1T+ps*0.92)%1;
-  b2T=(b2T+ps*0.85)%1;
-
-  const pct=Math.round(pT*100);
-  document.getElementById('pg-in').style.width=pct+'%';
-  document.getElementById('pg-pct').textContent=pct+'% completado';
-  const spd=Math.round(70+car.spd*14+Math.sin(pT*20)*5);
-  document.getElementById('rh-sp').textContent=spd+' km/h';
-
-  // position
-  const ahead=[b1T,b2T].filter(b=>b>pT).length;
-  document.getElementById('rh-po').textContent=(ahead===0?'1°':ahead===1?'2°':'3°');
-
-  // checkpoints
-  curCPs.forEach(cp=>{
-    const key=cp.t+'_'+cp.type;
-    if(!triggered.has(key)&&Math.abs(pT-cp.t)<0.018){
-      triggered.add(key);
-      if(cp.type==='bb'){rActive=false;openBB(cp.id);}
-      else if(cp.type==='ex'){rActive=false;openEx(cp.id);}
-      else if(cp.type==='bonus'){addXP(30,true);modal('⭐','¡Bonus!','+30 XP en pista.');}
+function stopRace(){rActive=false;if(raf){cancelAnimationFrame(raf);raf=null;}}
+ 
+function tick(ts){
+  const dt=lastTs?Math.min(ts-lastTs,50):16.67;
+  lastTs=ts;
+  if(rActive){
+    const ps=pSpd*(dt/16.67);
+    pT=(pT+ps)%1;
+    b1T=(b1T+ps*0.90)%1;
+    b2T=(b2T+ps*0.82)%1;
+ 
+    const pct=Math.round(pT*100);
+    document.getElementById('pgin').style.width=pct+'%';
+    document.getElementById('pgpct').textContent=pct+'%';
+    const spd=Math.round(70+CARS[S.sc].spd*13+Math.sin(pT*18)*4);
+    document.getElementById('rsp').textContent=spd+' km/h';
+    document.getElementById('rpo').textContent=[b1T,b2T].filter(b=>b>pT).length===0?'1°':[b1T,b2T].filter(b=>b>pT).length===1?'2°':'3°';
+ 
+    cps.forEach(cp=>{
+      const key=cp.t+''+cp.type;
+      if(!trig.has(key)&&Math.abs(pT-cp.t)<0.016){
+        trig.add(key);
+        if(cp.type==='bb'){rActive=false;openBB(cp.id);}
+        else if(cp.type==='ex'){rActive=false;openEx(cp.id);}
+        else if(cp.type==='bonus'){addXP(30,true);mod('⭐','¡Bonus!','+30 XP en pista.');}
+      }
+    });
+ 
+    if(pT>0.97&&!trig.has('lap')){
+      trig.add('lap');rActive=false;
+      S.circs[S.sci]=true;S.wins++;
+      if(S.daily.day===new Date().toDateString())S.daily.rc=1;
+      sv();addXP(150);chkTr();
+      document.getElementById('rst').textContent='¡Ganaste! 🏆';
+      document.getElementById('rst').style.color='var(--amber2)';
+      mod('🏆','¡Carrera completada!','Ganaste "'+CIRCS[S.sci].nm+'". +150 XP.');
     }
-  });
-
-  // lap completion
-  if(pT>0.97&&!triggered.has('lap_done')){
-    triggered.add('lap_done');
-    rActive=false;
-    S.circs[S.selCirc]=true;S.wins++;
-    if(S.daily.day===new Date().toDateString())S.daily.race=1;
-    save();addXP(150);checkTrophies();
-    document.getElementById('rh-st').textContent='¡Ganaste!';
-    document.getElementById('rh-st').style.color='var(--amber2)';
-    modal('🏆','¡Carrera completada!','Ganaste el '+CIRCS[S.selCirc].name+'. +150 XP. ¡El siguiente circuito te espera!');
   }
-
-  render();
-  rafId=requestAnimationFrame(tick);
+  draw();
+  raf=requestAnimationFrame(tick);
 }
-
-function render(){
-  if(!rCtx)return;
-  const ctx=rCtx;
-  ctx.clearRect(0,0,TW,TH);
-
-  // grass
-  ctx.fillStyle='#1c3a1c';ctx.fillRect(0,0,TW,TH);
+ 
+function draw(){
+  if(!ctx2)return;
+  const ctx=ctx2,W=CW,H=CH;
+  ctx.clearRect(0,0,W,H);
+ 
+  // fondo verde
+  ctx.fillStyle='#1c3a1c';ctx.fillRect(0,0,W,H);
   ctx.fillStyle='#1e441e';
-  for(let i=0;i<100;i++)ctx.fillRect(i*19%TW,i*27%TH,2,3);
-
-  // trees
-  [[24,50],[656,50],[24,355],[656,355],[340,355],[510,355],[170,355],[136,18],[510,18],[656,175],[24,200]].forEach(([tx,ty])=>{
-    ctx.fillStyle='#0d2a0d';ctx.beginPath();ctx.arc(tx,ty,11,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#1a4a1a';ctx.beginPath();ctx.arc(tx-2,ty-3,8,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#5a3820';ctx.fillRect(tx-2,ty+8,4,5);
+  for(let i=0;i<80;i++)ctx.fillRect(i*19%W,i*29%(H-10),2,3);
+ 
+  // árboles pequeños
+  [[20,30],[660,30],[20,185],[660,185],[340,190],[510,190],[165,190]].forEach(([tx,ty])=>{
+    ctx.fillStyle='#0d2a0d';ctx.beginPath();ctx.arc(tx,ty,9,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#1a4a1a';ctx.beginPath();ctx.arc(tx-1,ty-2,6,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='#5a3820';ctx.fillRect(tx-1,ty+6,3,5);
   });
-
-  // track border (curbs)
-  ctx.save();
+ 
+  // bordillos
   ctx.lineCap='round';ctx.lineJoin='round';
-  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);
-  for(let i=1;i<TP.length;i++)ctx.lineTo(TP[i].x,TP[i].y);
-  ctx.closePath();
-  ctx.strokeStyle='#999';ctx.lineWidth=52;ctx.stroke();
-  // alternating curb
-  ctx.setLineDash([16,16]);
-  ctx.strokeStyle='#cc3333';ctx.lineWidth=56;
-  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);
-  for(let i=1;i<TP.length;i++)ctx.lineTo(TP[i].x,TP[i].y);
-  ctx.closePath();ctx.stroke();
-  ctx.setLineDash([16,16]);ctx.lineDashOffset=16;
-  ctx.strokeStyle='#fff';
-  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);
-  for(let i=1;i<TP.length;i++)ctx.lineTo(TP[i].x,TP[i].y);
-  ctx.closePath();ctx.stroke();
+  ctx.setLineDash([13,13]);ctx.strokeStyle='#cc3333';ctx.lineWidth=44;
+  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);TP.forEach(p=>ctx.lineTo(p.x,p.y));ctx.closePath();ctx.stroke();
+  ctx.setLineDash([13,13]);ctx.lineDashOffset=13;ctx.strokeStyle='#fff';
+  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);TP.forEach(p=>ctx.lineTo(p.x,p.y));ctx.closePath();ctx.stroke();
   ctx.setLineDash([]);ctx.lineDashOffset=0;
-  ctx.restore();
-
-  // road surface
-  ctx.save();
-  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);
-  for(let i=1;i<TP.length;i++)ctx.lineTo(TP[i].x,TP[i].y);
-  ctx.closePath();
-  ctx.strokeStyle='#4a5548';ctx.lineWidth=44;ctx.stroke();
-  // lane dashes
-  ctx.setLineDash([20,20]);
-  ctx.strokeStyle='rgba(240,230,120,0.35)';ctx.lineWidth=1.5;
-  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);
-  for(let i=1;i<TP.length;i++)ctx.lineTo(TP[i].x,TP[i].y);
-  ctx.closePath();ctx.stroke();
+ 
+  // asfalto
+  ctx.strokeStyle='#4a5548';ctx.lineWidth=36;
+  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);TP.forEach(p=>ctx.lineTo(p.x,p.y));ctx.closePath();ctx.stroke();
+ 
+  // líneas de carril
+  ctx.setLineDash([16,16]);ctx.strokeStyle='rgba(240,230,100,.28)';ctx.lineWidth=1.2;
+  ctx.beginPath();ctx.moveTo(TP[0].x,TP[0].y);TP.forEach(p=>ctx.lineTo(p.x,p.y));ctx.closePath();ctx.stroke();
   ctx.setLineDash([]);
-  ctx.restore();
-
-  // finish line
-  for(let r=0;r<4;r++)for(let c=0;c<2;c++){
-    ctx.fillStyle=(r+c)%2===0?'#fff':'#111';
-    ctx.fillRect(70+c*5,312+r*5,5,5);
-  }
-  ctx.fillStyle='#fff';ctx.font='bold 8px sans-serif';ctx.textAlign='start';
-  ctx.fillText('META',82,313);
-
+ 
+  // meta
+  for(let r=0;r<3;r++)for(let c=0;c<2;c++){ctx.fillStyle=(r+c)%2===0?'#fff':'#111';ctx.fillRect(63+c*4,167+r*4,4,4);}
+  ctx.fillStyle='#fff';ctx.font='bold 7px sans-serif';ctx.textAlign='start';ctx.fillText('META',74,168);
+ 
   // checkpoints
-  curCPs.forEach(cp=>{
+  cps.forEach(cp=>{
     const p=tPos(cp.t);
-    ctx.beginPath();ctx.arc(p.x,p.y,15,0,Math.PI*2);
-    ctx.fillStyle=cp.type==='bb'?'#0a1a3a':cp.type==='bonus'?'#2a2000':'#2a1000';
-    ctx.fill();
-    ctx.strokeStyle=cp.color;ctx.lineWidth=2;ctx.stroke();
-    ctx.fillStyle='#fff';ctx.font='bold 10px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+    ctx.beginPath();ctx.arc(p.x,p.y,13,0,Math.PI*2);
+    ctx.fillStyle=cp.type==='bb'?'#0a1a3a':cp.type==='bonus'?'#2a2000':'#2a1000';ctx.fill();
+    ctx.strokeStyle=cp.col;ctx.lineWidth=2;ctx.stroke();
+    ctx.fillStyle='#fff';ctx.font='bold 9px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
     ctx.fillText(cp.type==='bb'?'i':cp.type==='bonus'?'★':'!',p.x,p.y);
-    ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='500 8px sans-serif';ctx.textBaseline='top';
-    ctx.fillText(cp.label,p.x,p.y+17);
+    ctx.fillStyle='rgba(255,255,255,.7)';ctx.font='500 7px sans-serif';ctx.textBaseline='top';
+    ctx.fillText(cp.lbl,p.x,p.y+15);
   });
-
-  // draw bots
-  drawCar(b2T,'#f4a261','#ffe0b0',false);
-  drawCar(b1T,'#cc4444','#f09090',false);
-  // draw player
-  const car=CARS[S.selCar];
-  drawCar(pT,car.color,car.acc,true);
+ 
+  // coches
+  drwCar(b2T,'#f4a261','#ffe0c0',false);
+  drwCar(b1T,'#cc4444','#f09090',false);
+  drwCar(pT,CARS[S.sc].col,CARS[S.sc].acc,true);
 }
-
-function drawCar(t,color,acc,player){
-  const ctx=rCtx;
-  const p=tPos(t);
-  const ang=tAngle(t);
-  ctx.save();
-  ctx.translate(p.x,p.y);
-  ctx.rotate(ang);
-  // body
-  ctx.fillStyle=color;
-  ctx.beginPath();ctx.roundRect(-13,-7,26,14,5);ctx.fill();
-  // cabin
-  ctx.fillStyle=acc;
-  ctx.beginPath();ctx.roundRect(-7,-6,14,10,2);ctx.fill();
-  // wheels
+ 
+function drwCar(t,col,acc,player){
+  const ctx=ctx2,p=tPos(t),ang=tAng(t);
+  ctx.save();ctx.translate(p.x,p.y);ctx.rotate(ang);
+  ctx.fillStyle=col;ctx.beginPath();ctx.roundRect(-11,-6,22,12,4);ctx.fill();
+  ctx.fillStyle=acc;ctx.beginPath();ctx.roundRect(-6,-5,12,8,2);ctx.fill();
   ctx.fillStyle='#111';
-  [[-9,7],[8,7],[-9,-7],[8,-7]].forEach(([wx,wy])=>{
-    ctx.beginPath();ctx.ellipse(wx,wy,4,3,0,0,Math.PI*2);ctx.fill();
-  });
-  // headlights
-  ctx.fillStyle='rgba(255,255,180,0.9)';
-  ctx.beginPath();ctx.ellipse(13,4,3,2,0,0,Math.PI*2);ctx.fill();
-  ctx.beginPath();ctx.ellipse(13,-4,3,2,0,0,Math.PI*2);ctx.fill();
-  // player glow
-  if(player){
-    ctx.strokeStyle='rgba(168,240,160,.6)';ctx.lineWidth=2;
-    ctx.beginPath();ctx.roundRect(-15,-9,30,18,6);ctx.stroke();
-  }
+  [[-7,6],[6,6],[-7,-6],[6,-6]].forEach(([wx,wy])=>{ctx.beginPath();ctx.ellipse(wx,wy,3.5,2.5,0,0,Math.PI*2);ctx.fill();});
+  ctx.fillStyle='rgba(255,255,180,.9)';ctx.beginPath();ctx.ellipse(11,3.5,2.5,1.8,0,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.ellipse(11,-3.5,2.5,1.8,0,0,Math.PI*2);ctx.fill();
+  if(player){ctx.strokeStyle='rgba(168,240,160,.55)';ctx.lineWidth=1.5;ctx.beginPath();ctx.roundRect(-13,-8,26,16,5);ctx.stroke();}
   ctx.restore();
 }
-
-// ===================== BILLBOARD / EXERCISE =====================
+ 
+// ═══════════════ OVERLAYS ═══════════════
 function openBB(id){
-  const ci=S.selCirc;
-  const b=(BB[ci]&&BB[ci][id])||BB[0][0];
-  document.getElementById('bb-ti').textContent=b.title;
-  document.getElementById('bb-th').innerHTML=b.th;
-  document.getElementById('bb-co').innerHTML=b.co.replace(/\n/g,'<br>');
+  const b=(BB[S.sci]&&BB[S.sci][id])||BB[0][0];
+  document.getElementById('bbti').textContent=b.t;
+  document.getElementById('bbth').innerHTML=b.th;
+  document.getElementById('bbco').innerHTML=b.co.replace(/\n/g,'<br>');
   document.getElementById('bb-panel').classList.add('vis');
   document.getElementById('ex-panel').classList.remove('vis');
-  document.getElementById('overlays').scrollTop=0;
+  document.getElementById('panel-area').scrollTop=0;
 }
 function openEx(id){
-  const ci=S.selCirc;
-  const arr=EX[ci]||EX[0];
+  const arr=EX[S.sci]||EX[0];
   const ex=arr[Math.min(id,arr.length-1)];
-  curExId_=id;selOpt_=null;
-  document.getElementById('ex-ti').textContent=ex.title;
-  document.getElementById('ex-q').textContent=ex.q;
-  document.getElementById('ex-ht').textContent='💡 '+ex.ht;
-  document.getElementById('ex-co').innerHTML=ex.co.replace(/\n/g,'<br>');
-  const oc=document.getElementById('ex-opts');oc.innerHTML='';
-  ex.opts.forEach((o,i)=>{
+  curExId=id;selO=null;
+  document.getElementById('exti').textContent=ex.t;
+  document.getElementById('exq').textContent=ex.q;
+  document.getElementById('exht').textContent='💡 '+ex.h;
+  document.getElementById('exco').innerHTML=ex.co.replace(/\n/g,'<br>');
+  const oc=document.getElementById('exopts');oc.innerHTML='';
+  ex.op.forEach((o,i)=>{
     const b=document.createElement('button');b.className='opt';b.textContent=o;
-    b.onclick=()=>{selOpt_=i;document.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');};
+    b.onclick=()=>{selO=i;document.querySelectorAll('.opt').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');};
     oc.appendChild(b);
   });
-  document.getElementById('fb-ok').className='fb';
-  document.getElementById('fb-err').className='fb';
+  document.getElementById('fbok').className='fb';
+  document.getElementById('fberr').className='fb';
   document.getElementById('ex-panel').classList.add('vis');
   document.getElementById('bb-panel').classList.remove('vis');
-  document.getElementById('overlays').scrollTop=0;
+  document.getElementById('panel-area').scrollTop=0;
 }
 function checkAns(){
-  if(selOpt_===null)return;
-  const ci=S.selCirc;
-  const arr=EX[ci]||EX[0];
-  const ex=arr[Math.min(curExId_,arr.length-1)];
+  if(selO===null)return;
+  const arr=EX[S.sci]||EX[0];
+  const ex=arr[Math.min(curExId,arr.length-1)];
   document.querySelectorAll('.opt').forEach((b,i)=>{
     if(i===ex.c)b.classList.add('cor');
-    else if(i===selOpt_&&selOpt_!==ex.c)b.classList.add('wrg');
+    else if(i===selO&&selO!==ex.c)b.classList.add('wrg');
   });
-  if(selOpt_===ex.c){
-    document.getElementById('fb-ok').textContent=ex.ok;
-    document.getElementById('fb-ok').className='fb ok';
-    document.getElementById('fb-err').className='fb';
-    addXP(50+ci*8);
-    S.exOk++;
+  if(selO===ex.c){
+    document.getElementById('fbok').textContent=ex.ok;
+    document.getElementById('fbok').className='fb ok';
+    document.getElementById('fberr').className='fb';
+    addXP(50+S.sci*8);S.exok++;
     if(S.daily.day===new Date().toDateString())S.daily.ex=Math.max(S.daily.ex||0,1);
-    save();
-    setTimeout(()=>{closeAllOv();rActive=true;rafId=requestAnimationFrame(tick);},1600);
-  } else {
-    document.getElementById('fb-err').textContent=ex.err;
-    document.getElementById('fb-err').className='fb err';
-    document.getElementById('fb-ok').className='fb';
+    sv();
+    setTimeout(()=>{closeOvs();rActive=true;},1500);
+  }else{
+    document.getElementById('fberr').textContent=ex.er;
+    document.getElementById('fberr').className='fb err';
+    document.getElementById('fbok').className='fb';
   }
 }
-function skipEx(){addXP(-10,true);closeAllOv();rActive=true;rafId=requestAnimationFrame(tick);}
-function closeOv(){closeAllOv();rActive=true;rafId=requestAnimationFrame(tick);}
-function closeAllOv(){
+function skipEx(){addXP(-10,true);closeOvs();rActive=true;}
+function closeOv(){closeOvs();rActive=true;}
+function closeOvs(){
   document.getElementById('bb-panel').classList.remove('vis');
   document.getElementById('ex-panel').classList.remove('vis');
 }
-
-// ===================== EDITOR =====================
-let curMis=0;
-function buildMis(){
+ 
+// ═══════════════ EDITOR ═══════════════
+let curM=0;
+function bldMis(){
   const g=document.getElementById('mis-grid');g.innerHTML='';
   EMIS.forEach((m,i)=>{
-    const done=S.edDone[i];
+    const done=S.ed[i];
     const d=document.createElement('div');
-    d.className='mis-card'+(i===curMis?' am':'');
-    d.innerHTML=`<div class="mn">Misión ${m.id+1} — ${CIRCS[i]?.name||''}</div><div class="mt">${m.title}</div><div class="md">${m.desc}</div><div class="${done?'mx':'mx'}" style="color:${done?'var(--green)':'var(--amber)'}">${done?'✓ Completada':'+'+m.xp+' XP'}</div>`;
-    d.onclick=()=>{curMis=i;loadMis(i);buildMis();};
+    d.className='mc'+(i===curM?' am':'');
+    d.innerHTML=`<div class="mn_">Misión ${m.id+1}</div><div class="mt_">${m.t}</div><div class="md_">${m.d}</div><div class="mx_" style="color:${done?'var(--green)':'var(--amber)'}">${done?'✓ Completada':'+'+m.xp+' XP'}</div>`;
+    d.onclick=()=>{curM=i;ldMis(i);bldMis();};
     g.appendChild(d);
   });
 }
-function loadMis(i){
+function ldMis(i){
   const m=EMIS[i];
-  document.getElementById('cta').value=m.starter;
-  document.getElementById('ed-lbl').textContent='Misión '+(m.id+1)+': '+m.title;
+  document.getElementById('cta').value=m.s;
+  document.getElementById('edlbl').textContent='Misión '+(m.id+1)+': '+m.t;
   document.getElementById('obox').textContent='Presiona Ejecutar...';
   document.getElementById('obox').className='';
-  document.getElementById('ed-st').textContent='';
-  document.getElementById('hint-box').style.display='none';
+  document.getElementById('edst').textContent='';
+  document.getElementById('hintbox').style.display='none';
 }
 function runCode(){
   const code=document.getElementById('cta').value.trim();
-  const obox=document.getElementById('obox');
-  const st=document.getElementById('ed-st');
+  const ob=document.getElementById('obox'),st=document.getElementById('edst');
   const lines=[];
   const fp=(...a)=>lines.push(a.map(x=>typeof x==='object'?JSON.stringify(x):String(x)).join(' '));
   try{
     let js=code;
-    // f-strings
     js=js.replace(/f"((?:[^"\\]|\\.)*)"/g,(_,t)=>'`'+t.replace(/\{([^}]+)\}/g,'${$1}')+'`');
     js=js.replace(/f'((?:[^'\\]|\\.)*)'/g,(_,t)=>'`'+t.replace(/\{([^}]+)\}/g,'${$1}')+'`');
     js=js.replace(/\bTrue\b/g,'true').replace(/\bFalse\b/g,'false').replace(/\bNone\b/g,'null');
     js=js.replace(/\bprint\s*\(/g,'fp(');
     js=js.replace(/\belif\b/g,'else if');
     js=js.replace(/\band\b/g,'&&').replace(/\bor\b/g,'||').replace(/\bnot\s+/g,'!');
-    js=js.replace(/^(\s*)def\s+(\w+)\s*\(([^)]*)\)\s*:/mg,(_,ind,nm,pr)=>`${ind}function ${nm}(${pr}){`);
-    js=js.replace(/^(\s*)for\s+(\w+)\s+in\s+range\((\d+)\s*,\s*(\d+)(?:\s*,\s*(\d+))?\)\s*:/mg,(_,ind,v,a,b,s)=>`${ind}for(let ${v}=${a};${v}<${b};${v}+=${s||1}){`);
-    js=js.replace(/^(\s*)for\s+(\w+)\s+in\s+range\((\d+)\)\s*:/mg,(_,ind,v,n)=>`${ind}for(let ${v}=0;${v}<${n};${v}++){`);
-    js=js.replace(/^(\s*)for\s+(\w+)\s*,\s*(\w+)\s+in\s+(\w+)\.items\(\)\s*:/mg,(_,ind,k,v,d)=>`${ind}for(let [${k},${v}] of Object.entries(${d})){`);
-    js=js.replace(/^(\s*)for\s+(\w+)\s+in\s+(\w+)\s*:/mg,(_,ind,v,a)=>`${ind}for(let ${v} of ${a}){`);
-    js=js.replace(/^(\s*)while\s+(.+)\s*:/mg,(_,ind,c)=>`${ind}while(${c}){`);
-    js=js.replace(/^(\s*)if\s+(.+)\s*:/mg,(_,ind,c)=>`${ind}if(${c}){`);
-    js=js.replace(/^(\s*)else\s+if\s+(.+)\s*:/mg,(_,ind,c)=>`${ind}} else if(${c}){`);
-    js=js.replace(/^(\s*)else\s*:/mg,(_,ind)=>`${ind}} else {`);
-    js=js.replace(/^(\s*)try\s*:/mg,(_,ind)=>`${ind}try{`);
-    js=js.replace(/^(\s*)except\s+\w+\s*:/mg,(_,ind)=>`${ind}} catch(e){`);
-    js=js.replace(/^(\s*)except\s*:/mg,(_,ind)=>`${ind}} catch(e){`);
-    js=js.replace(/^(\s*)finally\s*:/mg,(_,ind)=>`${ind}} finally{`);
+    js=js.replace(/^(\s*)def\s+(\w+)\s*\(([^)]*)\)\s*:/mg,(_,i,n,p)=>`${i}function ${n}(${p}){`);
+    js=js.replace(/^(\s*)for\s+(\w+)\s+in\s+range\((\d+)\s*,\s*(\d+)(?:\s*,\s*(\d+))?\)\s*:/mg,(_,i,v,a,b,s)=>`${i}for(let ${v}=${a};${v}<${b};${v}+=${s||1}){`);
+    js=js.replace(/^(\s*)for\s+(\w+)\s+in\s+range\((\d+)\)\s*:/mg,(_,i,v,n)=>`${i}for(let ${v}=0;${v}<${n};${v}++){`);
+    js=js.replace(/^(\s*)for\s+(\w+)\s*,\s*(\w+)\s+in\s+(\w+)\.items\(\)\s*:/mg,(_,i,k,v,d)=>`${i}for(let [${k},${v}] of Object.entries(${d})){`);
+    js=js.replace(/^(\s*)for\s+(\w+)\s+in\s+(\w+)\s*:/mg,(_,i,v,a)=>`${i}for(let ${v} of ${a}){`);
+    js=js.replace(/^(\s*)while\s+(.+)\s*:/mg,(_,i,c)=>`${i}while(${c}){`);
+    js=js.replace(/^(\s*)if\s+(.+)\s*:/mg,(_,i,c)=>`${i}if(${c}){`);
+    js=js.replace(/^(\s*)else\s+if\s+(.+)\s*:/mg,(_,i,c)=>`${i}} else if(${c}){`);
+    js=js.replace(/^(\s*)else\s*:/mg,(_,i)=>`${i}} else {`);
+    js=js.replace(/^(\s*)try\s*:/mg,(_,i)=>`${i}try{`);
+    js=js.replace(/^(\s*)except\s+\w+\s*:/mg,(_,i)=>`${i}} catch(e){`);
+    js=js.replace(/^(\s*)except\s*:/mg,(_,i)=>`${i}} catch(e){`);
+    js=js.replace(/^(\s*)finally\s*:/mg,(_,i)=>`${i}} finally{`);
     js=js.replace(/\.append\(/g,'.push(');
     js=js.replace(/\blen\((\w+)\)/g,'($1.length)');
     js=js.replace(/\bint\(([^)]+)\)/g,'(parseInt($1,10)||0)');
     js=js.replace(/\bfloat\(([^)]+)\)/g,'parseFloat($1)');
     js=js.replace(/\bstr\(([^)]+)\)/g,'String($1)');
-    // close unclosed braces
-    let d=0;
-    const jsl=js.split('\n');
-    for(const l of jsl){d+=(l.match(/\{/g)||[]).length-(l.match(/\}/g)||[]).length;}
-    for(let i=0;i<d;i++)js+='\n}';
-    const fn=new Function('fp',js);
-    fn(fp);
-    obox.textContent=lines.join('\n')||'(sin salida visible)';
-    obox.className='';
+    let dep=0;
+    js.split('\n').forEach(l=>{dep+=(l.match(/\{/g)||[]).length-(l.match(/\}/g)||[]).length;});
+    for(let i=0;i<Math.max(0,dep);i++)js+='\n}';
+    new Function('fp',js)(fp);
+    ob.textContent=lines.join('\n')||'(sin salida visible)';ob.className='';
     st.textContent='✓ OK';st.style.color='var(--green)';
-    if(lines.length>0&&!S.edDone[curMis]){
-      S.edDone[curMis]=true;
-      const xp=EMIS[curMis].xp;
-      addXP(xp);
-      modal('💻','¡Código ejecutado!','Tu código funcionó correctamente. +'+xp+' XP');
-      checkTrophies();buildMis();
+    if(lines.length>0&&!S.ed[curM]){
+      S.ed[curM]=true;const xp=EMIS[curM].xp;addXP(xp);
+      mod('💻','¡Código ejecutado!','Tu código funcionó. +'+xp+' XP');chkTr();bldMis();
     }
   }catch(ex){
-    const em={SyntaxError:'Error de sintaxis — revisa los dos puntos ":" y la indentación.',ReferenceError:'Variable no definida — ¿declaraste la variable antes de usarla?',TypeError:'Tipo incorrecto — revisa que estés usando el tipo correcto de dato.'};
+    const em={SyntaxError:'Sintaxis — revisa los dos puntos ":" y la indentación.',ReferenceError:'Variable no definida — ¿la declaraste antes de usarla?',TypeError:'Tipo incorrecto — revisa el tipo de dato.'};
     const e=Object.entries(em).find(([k])=>ex.name===k);
-    obox.textContent=(e?e[1]:'Error: '+ex.message)+'\n\nRevisa tu código línea por línea.';
-    obox.className='err';
-    st.textContent='✗ Error';st.style.color='var(--red)';
+    ob.textContent=(e?e[1]:'Error: '+ex.message)+'\n\nRevisa tu código línea por línea.';
+    ob.className='err';st.textContent='✗ Error';st.style.color='var(--red)';
   }
 }
-function clearEd(){document.getElementById('cta').value='';document.getElementById('obox').textContent='Presiona Ejecutar...';document.getElementById('obox').className='';document.getElementById('ed-st').textContent='';}
-function showHint(){const b=document.getElementById('hint-box');b.style.display='block';b.innerHTML='<b style="color:var(--text2)">💡 Pista:</b> <span style="color:var(--text);font-family:var(--font-mono);font-size:11px">'+EMIS[curMis].hint+'</span>';}
-
-// ===================== RANKING =====================
-function buildRanking(){
-  const me={name:'Tú 🏎️',xp:S.xp,lvl:S.level,wins:S.wins,streak:S.streak+'d'};
+function clearEd(){document.getElementById('cta').value='';document.getElementById('obox').textContent='Presiona Ejecutar...';document.getElementById('obox').className='';document.getElementById('edst').textContent='';}
+function showHint(){const b=document.getElementById('hintbox');b.style.display='block';b.innerHTML='<b style="color:var(--text2)">💡 Pista:</b> <span style="font-family:var(--mono);font-size:11px;color:var(--text)">'+EMIS[curM].h+'</span>';}
+ 
+// ═══════════════ RANKING ═══════════════
+function bldRnk(){
+  const me={nm:'Tú 🏎️',xp:S.xp,lv:S.lv,wi:S.wins,st:S.streak+'d'};
   const all=[...BOTS,me].sort((a,b)=>b.xp-a.xp);
-  const tb=document.getElementById('rank-body');tb.innerHTML='';
+  const tb=document.getElementById('rbody');tb.innerHTML='';
   all.forEach((r,i)=>{
     const tr=document.createElement('tr');
-    if(r.name.startsWith('Tú'))tr.className='me';
+    if(r.nm.startsWith('Tú'))tr.className='me';
     const m=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
-    tr.innerHTML=`<td>${m}</td><td>${r.name}</td><td class="rxp">${r.xp.toLocaleString()}</td><td class="rlv">${r.lvl}</td><td>${r.wins}</td><td class="rst">${r.streak}</td>`;
+    tr.innerHTML=`<td>${m}</td><td>${r.nm}</td><td class="rxp">${r.xp.toLocaleString()}</td><td class="rlv">${r.lv}</td><td>${r.wi}</td><td class="rst">${r.st}</td>`;
     tb.appendChild(tr);
   });
-  const dg=document.getElementById('daily-g');dg.innerHTML='';
-  const DM=[
-    {icon:'⚡',title:'Velocista',desc:'Responde un ejercicio hoy',key:'ex',goal:1,xp:30},
-    {icon:'🔥',title:'Racha activa',desc:'Abre el juego hoy',key:'open',goal:1,xp:20},
-    {icon:'🏁',title:'Gran corredor',desc:'Termina una carrera',key:'race',goal:1,xp:80},
-  ];
-  DM.forEach(dm=>{
-    const prog=Math.min(S.daily[dm.key]||0,dm.goal);
-    const done=prog>=dm.goal;
+  const dg=document.getElementById('dg');dg.innerHTML='';
+  [{ic:'⚡',t:'Velocista',d:'Responde un ejercicio hoy',k:'ex',g:1,xp:30},
+   {ic:'🔥',t:'Racha activa',d:'Abre el juego hoy',k:'op',g:1,xp:20},
+   {ic:'🏁',t:'Gran corredor',d:'Termina una carrera',k:'rc',g:1,xp:80}].forEach(dm=>{
+    const p=Math.min(S.daily[dm.k]||0,dm.g);
+    const done=p>=dm.g;
     const d=document.createElement('div');d.className='dc';
-    d.innerHTML=`<div style="font-size:18px;margin-bottom:3px">${dm.icon}</div><div class="dt">${dm.title}</div><div class="dd">${dm.desc}</div><div class="dpb"><div class="dpf" style="width:${prog/dm.goal*100}%;background:${done?'var(--green)':'var(--amber)'}"></div></div><div class="dx">+${dm.xp} XP${done?' ✓':''}</div>`;
+    d.innerHTML=`<div style="font-size:17px;margin-bottom:3px">${dm.ic}</div><div class="dt_">${dm.t}</div><div class="dd_">${dm.d}</div><div class="dpb"><div class="dpf" style="width:${p/dm.g*100}%;background:${done?'var(--green)':'var(--amber)'}"></div></div><div class="dx_">+${dm.xp} XP${done?' ✓':''}</div>`;
     dg.appendChild(d);
   });
 }
-
-// ===================== TROPHIES =====================
-function checkTrophies(){
-  const earn=id=>{if(!S.trophies.includes(id)){S.trophies.push(id);save();const t=TROPHIES.find(x=>x.id===id);if(t)modal(t.icon,'¡Logro desbloqueado!','"'+t.name+'" — '+t.desc);}};
-  if(S.wins>=1)earn('win1');
-  if(S.exOk>=1)earn('ex1');
+ 
+// ═══════════════ LOGROS ═══════════════
+function chkTr(){
+  const earn=id=>{if(!S.tr.includes(id)){S.tr.push(id);sv();const t=TROPH.find(x=>x.id===id);if(t)mod(t.ic,'¡Logro desbloqueado!','"'+t.nm+'" — '+t.ds);}};
+  if(S.wins>=1)earn('w1');if(S.exok>=1)earn('e1');
   ['c0','c1','c2','c3','c4','c5','c6','c7'].forEach((id,i)=>{if(S.circs[i])earn(id);});
-  if(S.edDone.filter(Boolean).length>=5)earn('ed5');
+  if(S.ed.filter(Boolean).length>=5)earn('ed5');
   if(S.streak>=7)earn('s7');
 }
-function buildTrophies(){
-  const g=document.getElementById('tr-g');g.innerHTML='';
-  TROPHIES.forEach(t=>{
-    const e=S.trophies.includes(t.id);
+function bldTr(){
+  const g=document.getElementById('tg');g.innerHTML='';
+  TROPH.forEach(t=>{
+    const e=S.tr.includes(t.id);
     const d=document.createElement('div');
-    d.className='tr-card'+(e?' earned':' locked-t');
-    d.innerHTML=`<div class="ti">${t.icon}</div><div class="tnm">${t.name}</div><div class="tds">${t.desc}</div>${e?'<div style="font-size:10px;color:var(--green);margin-top:3px">✓ Obtenido</div>':''}`;
+    d.className='tc'+(e?' earned':' lkt');
+    d.innerHTML=`<div class="tic">${t.ic}</div><div class="tnm">${t.nm}</div><div class="tds">${t.ds}</div>${e?'<div style="font-size:10px;color:var(--green);margin-top:3px">✓ Obtenido</div>':''}`;
     g.appendChild(d);
   });
 }
-
-// ===================== MODAL =====================
-function modal(ic,ti,ms){
-  document.getElementById('mic').textContent=ic;
-  document.getElementById('mti').textContent=ti;
-  document.getElementById('mms').textContent=ms;
-  document.getElementById('modal-wrap').classList.add('open');
-}
-function closeModal(){document.getElementById('modal-wrap').classList.remove('open');}
-
-// ===================== INIT =====================
-load();
-buildGarage();
-initRaceCanvas();
-render();
+ 
+// ═══════════════ MODAL ═══════════════
+function mod(ic,ti,ms){document.getElementById('mic').textContent=ic;document.getElementById('mti').textContent=ti;document.getElementById('mms').textContent=ms;document.getElementById('mwrap').classList.add('open');}
+function closeMod(){document.getElementById('mwrap').classList.remove('open');}
+ 
+// ═══════════════ INIT ═══════════════
+ld();bldGar();initCV();draw();
 </script>
 </body>
 </html>
